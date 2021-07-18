@@ -1,0 +1,50 @@
+.countdown_timer {
+    display: flex;
+    max-width: 100%;
+    justify-content: space-around;
+    background-color: #181718;
+    overflow: hidden;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.four_type {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px 10px;
+    padding-bottom: 45px;
+    width: 24%;
+    position: relative;
+    justify-content: center;
+}
+
+.countdown_timer span {
+    color: white;
+    font-size: 30px;
+    margin-top: 13px;
+}
+
+.four_type h1 {
+    margin-top: 0;
+    color: white;
+    font-size: 45px;
+    text-align: center;
+}
+
+.four_type h2 {
+    font-size: 15px;
+    margin-top: 10px;
+    background-color: #2f2f2f;
+    color: #757575;
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 107%;
+    padding: 8px;
+    padding-right: 15px;
+}
+
+.four_type:nth-child(2) h2 {
+    padding-right: 10px;
+}

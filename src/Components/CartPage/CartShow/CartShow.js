@@ -1,0 +1,74 @@
+import React, { useContext, useEffect, useState } from 'react';
+import { CartProducts, CategoryData } from '../../../App';
+import './CartShow.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import { ToastProvider, useToasts } from 'react-toast-notifications';
+import useLocalStorage from '../../LocalStorage/LocalStorage';
+
+const CartShow = (props) => {
+    const { addToast } = useToasts();
+    const [cartInfo, setCartInfo] = useContext(CartProducts)
+    // const [cartSubTotal, setCartSubTotal] = useContext(CartSubTotal)
+    const {id, quantity, productCategory} = props.data;
+    const [categories, setCategories] = useContext(CategoryData)
+    const selectedCategory = categories?.find(category => category.name === productCategory)
+    const cartedProduct = selectedCategory?.products?.find(product => product.id === id)
+    const [loginData, setLoginData] = useLocalStorage('user_data', {})
+    const [loading, setLoading] = useState(false)
+
+    const discountedPrice = cartedProduct && cartedProduct.productPrice - ((cartedProduct.productPrice * cartedProduct.productDiscount) / 100)
+
+    const deleteCartProductBtn = (e) => {
+        e.preventDefault()
+        setLoading(true)
+        const newCartProducts = cartInfo.cartProducts.filter(product => product.id !== id)
+
+        fetch(`https://bandhon-ecommerce.herokuapp.com/add-cart-product/id?id=${cartInfo._id}`, {
+            method:'PATCH',
+            headers: { 'content-type':'application/json'},
+            body:JSON.stringify(newCartProducts)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.modifiedCount !== 0) {
+                fetch('https://bandhon-ecommerce.herokuapp.com/get-user-data')
+                .then(response => response.json())
+                .then(data => {
+                    if(loginData) {
+                        const myData = data?.find(user => user.uid === loginData.uid)
+                        setCartInfo(myData)
+                        addToast('Product successfully deleted from cart', { appearance: 'error', autoDismiss: true, autoDismissTimeout: 3000 })
+                    }
+                })
+            }
+        })
+    }
+
+    return (
+        <>
+            {
+                selectedCategory && 
+                <div className="cart_show">
+                    <div className="cart_page_2_icon">
+                        <Link to={`/product/${productCategory}/${id}`} className="cart_page_edit"><FontAwesomeIcon className="cart_page_svg" icon={faEdit}/></Link>
+                        {
+                            loading === true ? <FontAwesomeIcon className="cart_page_svg cart_delete_btn" icon={faTrashAlt} /> : <FontAwesomeIcon className="cart_page_svg cart_delete_btn" onClick={deleteCartProductBtn} icon={faTrashAlt} />
+                        }
+                    </div>
+                    <div className="cart_show_info">
+                        <img src={cartedProduct.productImage} alt="" />
+                        <div className="cart_show_middle">
+                            <h3>{cartedProduct.productName}</h3>
+                            <span>Quantity: {quantity}</span>
+                        </div>
+                    </div>
+                    <p>৳ {discountedPrice}</p>
+                </div>
+            }
+        </>
+    );
+};
+
+export default CartShow;

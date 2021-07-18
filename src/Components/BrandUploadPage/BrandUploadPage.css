@@ -1,0 +1,37 @@
+.brand_upload{
+	height:auto;
+	width:100%;
+	margin:  auto;
+	background-color:rgb(219, 214, 214);
+	padding: 50px;
+}
+
+.brand_field_div label {
+    font-size: 15px;
+    color: black;
+    display: block;
+}
+
+.brand_field_div input,
+.brand_field_div select {
+    border: 1px solid gray;
+    width: 200px;
+    padding: 5px 10px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+.brand_file input {
+    width: auto;
+}
+
+.brand_upload_btn {
+    padding: 7px 20px;
+    color: white;
+    background: tomato;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+

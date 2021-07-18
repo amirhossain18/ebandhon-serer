@@ -1,0 +1,42 @@
+.mform{
+	height:auto;
+	width:100%;
+	margin:  auto;
+	background-color:rgb(219, 214, 214);
+	padding: 50px;
+}
+
+.mform label {
+	display: block;
+	font-size: 16px;
+}
+
+.product_field {
+	margin-top: 20px;
+}
+
+.mform input {
+	font-size: 14px;
+    border: 1px solid gray;
+    padding: 5px 10px;
+    width: 200px;
+    outline: none;
+}
+
+.mform select {
+    word-wrap: normal;
+    width: 200px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.mform button {
+	padding: 7px 30px;
+	border: none;
+	background: tomato;
+	color: white;
+	border-radius: 5px;
+	font-size: 14px;
+	margin-top: 50px;
+}
+

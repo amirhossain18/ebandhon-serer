@@ -1,0 +1,324 @@
+.header_image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.category_left_hidden {
+    width: 200px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #262626;
+    z-index: 99999999;
+    transition: .3s;
+    transform: translateX(-100%)
+}
+
+.header_contact_icon {
+    font-size: 12px;
+    color: white;
+    margin-right: 5px;
+}
+
+.cross_icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    width: 32px !important;
+    height: 32px;
+    padding: 5px;
+}
+
+.category_open_active {
+    transform: translateX(0)
+}
+
+.category_left_h1 {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 0;
+}
+
+.categories_single_name_hidden {
+    background: #262626;
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #555;
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+.categories_single_name_hidden svg {
+    transition: 0.2s;
+}
+
+.categories_single_name_hidden:last-child {
+    border-bottom: 1px solid #555;
+}
+
+.categories_single_name_hidden:hover,
+.categories_single_name_hovered {
+    background: #404040;
+}
+
+.categories_single_name_hidden a {
+    color: white;
+    text-decoration: none;
+}
+
+.categories_single_name_hidden:hover .hidden_sub_categories {
+    /* height: 50px; */
+}
+
+.hidden_sub_categories {
+    max-height: 0;
+    transition: max-height 0.2s;
+    overflow: hidden;
+}
+
+.active_sub_category_arrow {
+    transform: rotate(90deg);
+    transition: .2s;
+}
+
+.hidden_sub_category {
+    background: #525252;
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #848484;
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+.active_sub_category {
+    max-height: 70px;
+}
+
+.hidden_sub_category:hover {
+    background-color: #3c3c3c;
+}
+
+.hidden_sub_category a {
+    color: white;
+    text-decoration: none;
+}
+
+.header_first {
+    background-color: #6A6A6A;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.header_top_dev_details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header_top_dev_details a, 
+.header_top_dev_details span {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.email_ebandhon {
+    margin-left: 25px;
+}
+
+.header_login_btn {
+    color: white;
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+.header_login_btn:hover {
+    text-decoration: underline;
+}
+
+.header_second {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.header_second_left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    /* width: 50px; */
+    height: 45px;
+    /* border: 1px solid black; */
+}
+
+.logo_text {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0;
+    margin-left: 7px;
+}
+
+.header_second_right {
+    display: flex;
+    align-items: center;
+}
+
+.header_cart_icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart_item_count_show {
+    position: absolute;
+    color: orange;
+    font-size: 12px;
+    padding-left: 2px;
+}
+
+.header_right_svg {
+    margin: 8px;
+    color: black !important;
+}
+
+.header_right_svg svg {
+    margin: 0 !important;
+}
+
+.header_second_right svg {
+    font-size: 25px;
+    margin: 8px;
+    cursor: pointer;
+}
+
+/* .header_second_right svg:last-child {
+    margin-top: 10px;
+    margin-right: 0;
+} */
+
+.header_search_box {
+    width: 400px;
+    height: 40px;
+    position: relative;
+    margin-right: 15px;
+    /* overflow: hidden; */
+}
+
+.header_search_box input {
+    width: 100%;
+    height: 100%;
+    border: 3px solid #DD0122;
+    outline: none;
+    padding-left: 8px;
+    padding-right: 50px;
+    /* transition: .5s; */
+    /* transform: scaleX(0); */
+    /* transform-origin: right; */
+}
+
+/* .header_search_box input:focus,
+.search_box_active {
+    transform: scaleX(1) !important;
+} */
+
+.header_search_box label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #DD0122;
+    color: white;
+    width: 45px;
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.header_search_box label svg {
+    margin: 0;
+    font-size: 22px;
+    margin-top: 9.5px;
+}
+
+.header_third {
+    background-color: #242424;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+.header_third .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.categories {
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    background-color: #AD2A2B;
+    cursor: pointer;
+    border-radius: 1px;
+}
+
+.categories svg {
+    font-size: 17px;
+    margin: 10px 20px;
+}
+
+.categories svg:last-child {
+    font-size: 15px;
+    transform: rotate(90deg);
+}
+
+.categories h1 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.extra_nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.extra_nav a:hover {
+    text-decoration: underline;
+}

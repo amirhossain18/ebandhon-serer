@@ -1,0 +1,20 @@
+.register_data th,
+.register_data td {
+    border: 1px solid black;
+    padding: 3px 10px;
+}
+
+.register_data {
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.register_data h1 {
+    text-align: center;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.LW_submitting {
+    display: flex;
+}

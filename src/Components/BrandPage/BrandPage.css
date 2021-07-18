@@ -1,0 +1,16 @@
+.bp_brand_image {
+    width: 300px;
+    text-align: center;
+    display: block;
+    margin: auto;
+}
+
+.bp_brand_image img {
+    width: 100%;
+    margin-top: 40px;
+}
+
+/* .brand_page_discount {
+    font-size: 12px !important;
+    text-decoration: line-through;
+} */

@@ -1,0 +1,16 @@
+.home_page_bottom_section {
+    display: flex;
+    flex-direction: column;
+}
+
+.home_show_more_btn {
+    background: tomato;
+    color: white;
+    border: none;
+    padding: 8px 25px;
+    margin: auto;
+}
+
+.home_show_more_btn:hover {
+    color: white;
+}
