@@ -20,7 +20,7 @@ export const googleSignIn = () => {
             image: photoURL,
             admin: false,
             uid: uid,
-            error: '',
+            error: ''
           };
         return loggedInUser;
     })

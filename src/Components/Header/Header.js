@@ -4,22 +4,42 @@ import { Cart, Person } from 'react-bootstrap-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBars, faAngleRight, faTimes, faCaretRight, faPhoneAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../images/logo.png'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import useLocalStorage from '../LocalStorage/LocalStorage'
-import { CartProducts, UserData } from '../../App';
+import { CartProducts, CategoryOpen, UserData } from '../../App';
 
 const Header = () => {
+    const location = useLocation()
     const [cartInfo, setCartInfo] = useContext(CartProducts)
     const [signedInUser, setSignedInUser] = useContext(UserData)
     const [loginData, setLoginData] = useLocalStorage('user_data', {})
     const [openHiddenCategory, setOpenHiddenCategory] = useState('')
-    let [categoryOpen, setCategoryOpen] = useState(false)
+    const [categoryOpen, setCategoryOpen] = useContext(CategoryOpen)
+    const [profileClick, setProfileClick] = useState(false)
+    const [paymentData, setPaymentData] = useLocalStorage('payment_data', {})
+    const [campaignPaymentData, setCampaignPaymentData] = useLocalStorage('campaign_payment_data', {})
 
     const categoryToggler = () => {
         setCategoryOpen(false)
     }
+
+    const logOutBtn = (e) => {
+        e.preventDefault()
+        setLoginData({isSignedIn: false})
+        setPaymentData([])
+        setCampaignPaymentData([])
+        setProfileClick(!profileClick)
+        window.location.reload()
+    }
     return (
         <div className="header">
+            {
+                cartInfo?.admin && cartInfo.admin === true && <div className="admin_header container">
+                    <Link to="/admin/upload/brand">Upload Brand</Link>
+                    <Link to="/admin/upload/product">Upload Product</Link>
+                    <Link to="/admin/upload/campaign">Upload Campaign</Link>
+                </div>
+            }
             <div className={`category_left_hidden ${categoryOpen && 'category_open_active'}`}>
                 <div style={{position: 'relative'}}>
                     <FontAwesomeIcon onClick={() => setCategoryOpen(false)} className="cross_icon" icon={faTimes} />
@@ -153,7 +173,10 @@ const Header = () => {
                         </div>
                         <div className="header_login_btn">
                             {
-                                signedInUser.isSignedIn === true ? <span>{signedInUser.name}<img className="header_image" src={signedInUser.image} alt=""/></span> : loginData.isSignedIn ? <span>{loginData.name}<img className="header_image" src={loginData.image} alt=""/></span> : <Link to="/SignIn"><span>Login</span></Link>
+                                signedInUser.isSignedIn === true ? <span>{signedInUser.name}<img className="header_image" src={signedInUser.image} alt=""/></span> : loginData.isSignedIn ? <span>{loginData.name}<img className="header_image" src={loginData.image} alt=""/></span> : <Link to={{ 
+                                    pathname: `/signIn`,
+                                    state: location.pathname
+                                  }}><span>Login</span></Link>
                             }
                         </div>
                     </div>
@@ -170,7 +193,15 @@ const Header = () => {
                         <label htmlFor="search"><FontAwesomeIcon icon={faSearch} /></label>
                     </div>
                     <Link className="header_cart_icon header_right_svg" to="/page/cart"><Cart /><span className="cart_item_count_show">{cartInfo?.cartProducts ? `${cartInfo?.cartProducts.length}` : '0' }</span></Link>
-                    <Person className="header_profile_icon" />
+                    <div className="profile_icon">
+                        <Person onClick={() => setProfileClick(!profileClick)} className="header_profile_icon" />
+                        <div className={`profile_dropdown ${profileClick === true && 'profile_dropdown_active'}`}>
+                            <Link className="profile_drop_single" to="/profile">Profile</Link>
+                            {
+                                loginData.uid ? <span onClick={(e) => logOutBtn(e)} className="profile_drop_single">Log Out</span> : <span className="profile_drop_single"><Link to="/signIn">Login</Link></span>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="header_third">
@@ -181,9 +212,7 @@ const Header = () => {
                         <FontAwesomeIcon icon={faAngleRight} />
                     </div>
                     <div className="extra_nav">
-                        <a href="#">Hot Deal</a>
-                        <a href="#">Gift Cart</a>
-                        <a href="#">Whole Sale</a>
+                        <Link to="/campaign">Campaign</Link>
                         <a href="#">Announcement</a>
                     </div>
                 </div>

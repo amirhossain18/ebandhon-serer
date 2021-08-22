@@ -6,6 +6,8 @@ import { facebookSignIn, googleSignIn, initializeLoginFrameworkFirebase } from '
 import { CartProducts, UserData } from '../../App';
 import useLocalStorage from '../LocalStorage/LocalStorage';
 import { useHistory, useLocation, Link } from 'react-router-dom';
+import uuid from 'react-uuid'
+import { IKContext, IKUpload } from 'imagekitio-react';
 
 initializeLoginFrameworkFirebase()
 
@@ -18,87 +20,235 @@ const SignIn = () => {
 
     let history = useHistory();
     let location = useLocation();
+
     let { from } = location.state || { from: { pathname: "/" } };
+    // console.log(from)
 
     const [signedInUser, setSignedInUser] = useContext(UserData)
     const [cartInfo, setCartInfo] = useContext(CartProducts)
     const [loginData, setLoginData] = useLocalStorage('user_data', {})
     const [signIn, setSignIn] = useState(false)
-    const [dbUserData, setDbUserData] = useState([])
-
-    useEffect(() => {
-        fetch('https://bandhon-ecommerce.herokuapp.com/get-user-data')
-        .then(response => response.json())
-        .then(data => {
-            setDbUserData(data)
-            if(loginData) {
-                const myData = data?.find(user => user.uid === loginData.uid)
-                setCartInfo(myData)
-            }
-        })
-    }, [signedInUser, loginData])
+    // form data
+    const [fullName, setFullName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [imageLink, setImageLink] = useState('')
 
     const handleGoogleSignIn = () => {
         googleSignIn()
         .then(gotLoginData => {
-            const myData = dbUserData?.find(user => user.uid === gotLoginData.uid)
-            // console.log(myData)
-            if (myData) {
-                setSignedInUser(gotLoginData)
-                setLoginData(gotLoginData)
-                setCartInfo(myData)
-                history.replace(from);
-            }
-            else {
-                const add_user_data = {name:gotLoginData.name, email:gotLoginData.email, image:gotLoginData.image, uid:gotLoginData.uid}
-
-                fetch('https://bandhon-ecommerce.herokuapp.com/add-user-data', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(add_user_data)
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if(data.insertedCount === 1){
-                        setSignedInUser(gotLoginData)
-                        setLoginData(gotLoginData)
-                        setCartInfo(myData)
+            fetch(`https://bandhon-ecommerce.herokuapp.com/get-user-data/id?id=${gotLoginData.uid}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.uid) {
+                    setSignedInUser(gotLoginData)
+                    setLoginData(gotLoginData)
+                    setCartInfo(data)
+                    if (from) {
                         history.replace(from);
                     }
-                })
-            }
+                    else {
+                        history.replace({pathname: '/'});
+                    }
+                }
+                else {
+                    const add_user_data = {name:gotLoginData.name, email:gotLoginData.email, image:gotLoginData.image, uid:gotLoginData.uid}
+    
+                    fetch('https://bandhon-ecommerce.herokuapp.com/add-user-data', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(add_user_data)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.uid){
+                            setSignedInUser(gotLoginData)
+                            setLoginData(gotLoginData)
+                            setCartInfo(data)
+                            if (from) {
+                                history.replace(from);
+                            }
+                            else {
+                                history.replace({pathname: '/'});
+                            }
+                        }
+                        else{
+                            alert('We are unable to login to your account. Please reload the page and try again.')
+                        }
+                    })
+                }
+            })
         })
     }
     const handleFacebookSignIn = () => {
         facebookSignIn()
         .then(gotLoginData => {
-            const myData = dbUserData?.find(user => user.uid === gotLoginData.uid)
-            // console.log(myData)
-            if (myData) {
-                setSignedInUser(gotLoginData)
-                setLoginData(gotLoginData)
-                setCartInfo(myData)
-                history.replace(from);
+            fetch(`https://bandhon-ecommerce.herokuapp.com/get-user-data/id?id=${gotLoginData.uid}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.uid) {
+                    setSignedInUser(gotLoginData)
+                    setLoginData(gotLoginData)
+                    setCartInfo(data)
+                    if (from) {
+                        history.replace(from);
+                    }
+                    else {
+                        history.replace({pathname: '/'});
+                    }
+                }
+                else {
+                    const add_user_data = {name:gotLoginData.name, email:gotLoginData.email, image:gotLoginData.image, uid:gotLoginData.uid}
+    
+                    fetch('https://bandhon-ecommerce.herokuapp.com/add-user-data', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(add_user_data)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.uid){
+                            setSignedInUser(gotLoginData)
+                            setLoginData(gotLoginData)
+                            setCartInfo(data)
+                            if (from) {
+                                history.replace(from);
+                            }
+                            else {
+                                history.replace({pathname: '/'});
+                            }
+                        }
+                        else{
+                            alert('We are unable to login to your account. Please reload the page and try again.')
+                        }
+                    })
+                }
+            })
+        })
+    }
+
+    // uploading image and getting link
+    const [imageLoading, setImageLoading] = useState(false)
+    const onError = err => {
+        setImageLoading(false)
+        setImageLink('')
+    };
+      
+    const onSuccess = res => {
+        setImageLoading(false)
+        setImageLink(res.url)
+    };
+
+    const [imageUploadTitle, setImageUploadTitle] = useState('')
+    const imageUpload = (e) => {
+        setImageUploadTitle('')
+        if(e.target.value){
+            setImageUploadTitle(e.target.value)
+            setImageLink('')
+            setImageLoading(true)
+        }
+    }
+
+    // email pass register
+    const [imageSelect, setImageSelect] = useState('')
+    const [registerClicked, setRegisterClicked] = useState(false)
+    const registerUser = (e) => {
+        e.preventDefault()
+        if(fullName) {
+            if(email) {
+                if(password) {
+                    if(imageLink){
+                        setRegisterClicked(true)
+                        setImageSelect('')
+                        const uid = uuid().replaceAll('-', '@')
+                        const data = {name:fullName, email, password, uid, image:imageLink, imageProfile:imageLink}
+                        fetch('https://bandhon-ecommerce.herokuapp.com/register-new-user', {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify(data)
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if(data.error) {
+                                setRegisterClicked(false)
+                                setImageSelect(data.error)
+                            }
+                            else if (data[0].uid) {
+                                setRegisterClicked(false)
+                                const newData = data[0]
+                                delete newData.password
+                                newData.isSignedIn = true
+                                setSignedInUser(newData)
+                                setLoginData(newData)
+                                setCartInfo(newData)
+                                if (from) {
+                                    history.replace(from);
+                                }
+                                else {
+                                    history.replace({pathname: '/'});
+                                }
+                            }
+                        })
+                    }
+                    else {
+                        setImageSelect('Please select a profile picture.')
+                    }
+                }
+                else {
+                    setImageSelect('Please write your password.')
+                }
             }
             else {
-                const add_user_data = {name:gotLoginData.name, email:gotLoginData.email, image:gotLoginData.image, uid:gotLoginData.uid}
+                setImageSelect('Please write your email.')
+            }
+        }
+        else {
+            setImageSelect('Please write your name.')
+        }
+    }
 
-                fetch('https://bandhon-ecommerce.herokuapp.com/add-user-data', {
+    // email pass login
+    const [loginClicked, setLoginClicked] = useState(false)
+    const [loginValid, setLoginValid] = useState('')
+    const emailPassLogin = (e) => {
+        e.preventDefault()
+        if(email) {
+            if(password) {
+                setLoginValid('')
+                setLoginClicked(true)
+                const data = {email, password}
+                fetch('https://bandhon-ecommerce.herokuapp.com/email-pass-login', {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(add_user_data)
+                    headers: { 'Content-Type': 'application/json'},
+                    body: JSON.stringify(data)
                 })
                 .then(res => res.json())
                 .then(data => {
-                    if(data.insertedCount === 1){
-                        setSignedInUser(gotLoginData)
-                        setLoginData(gotLoginData)
-                        setCartInfo(myData)
-                        history.replace(from);
+                    if(data.error) {
+                        setLoginValid(data.error)
+                        setLoginClicked(false)
+                    }
+                    else if (data.status === 'success') {
+                        setLoginClicked(false)
+                        setSignedInUser(data.data)
+                        setLoginData(data.data)
+                        setCartInfo(data.data)
+                        if (from) {
+                            history.replace(from);
+                        }
+                        else {
+                            history.replace({pathname: '/'});
+                        }
                     }
                 })
             }
-        })
+            else {
+                setLoginValid('Please write your password.')
+            }
+        }
+        else {
+            setLoginValid('Please write your email.')
+        }
     }
     return (
         <div className="sign_in_page">
@@ -108,18 +258,30 @@ const SignIn = () => {
                     <div className="form-container sign-up-container">
                         <form className="sign_in_form" action="#">
                             <h1 className="sign_in_h1">Create Account</h1>
-                            <div className="social-container">
+                            {/* <div className="social-container">
                                 <FontAwesomeIcon onClick={handleFacebookSignIn} icon={faFacebookF} />
                                 <FontAwesomeIcon onClick={handleGoogleSignIn} icon={faGoogle} />
                             </div>
-                            <span className="sign_in_span">or use your email for registration</span>
-                            <input className="sign_in_input" type="text" placeholder="Name" />
-                            <input className="sign_in_input" type="email" placeholder="Email" />
-                            <input className="sign_in_input" type="password" placeholder="Password" />
+                            <span className="sign_in_span">or use your email for registration</span> */}
+                            <input value={fullName} onChange={(e) => setFullName(e.target.value)} className="sign_in_input" type="text" placeholder="Name" required/>
+                            <input value={email} onChange={(e) => setEmail(e.target.value)} className="sign_in_input" type="email" placeholder="Email" required/>
+                            <input value={password} onChange={(e) => setPassword(e.target.value)} className="sign_in_input" type="password" placeholder="Password" required/>
+                            <IKContext
+                                publicKey="public_5rRmOCN1vK/MI28l98iNzt8jNhQ="
+                                urlEndpoint="https://ik.imagekit.io/ebnirpt9i8agxu"
+                                transformationPosition="path"
+                                authenticationEndpoint="https://bandhon-ecommerce.herokuapp.com/auth">
+
+                                <span className="text-center">{imageLoading && 'Uploading image'}</span>
+                                <label className="sign_in_input up_profile_sign" htmlFor="user_profile">{imageUploadTitle ? `${imageUploadTitle}` : 'Select Profile Image'}</label>
+                                <IKUpload id="user_profile" className="sign_in_input d-none" onChange={(e) => imageUpload(e)} onError={onError} onSuccess={onSuccess} fileName="user-register" />
+                            </IKContext>
+                            <span className="text-center text-danger image_error">{imageSelect}</span>
                             {
-                                signedInUser.error !== '' && <p>{signedInUser.error}</p>
+                                registerClicked ? <button className="sign_in_page_btn register_spin"><div className="spinner-border text-light" role="status">
+                                <span className="sr-only">Loading...</span>
+                              </div></button> : <button type="submit" onClick={(e) => registerUser(e)} className="sign_in_page_btn">Sign Up</button>
                             }
-                            <button className="sign_in_page_btn">Sign Up</button>
                         </form>
                     </div>
                     <div className="form-container sign-in-container">
@@ -130,10 +292,15 @@ const SignIn = () => {
                                 <FontAwesomeIcon onClick={handleGoogleSignIn} icon={faGoogle} />
                             </div>
                             <span className="sign_in_span">or use your account</span>
-                            <input className="sign_in_input" type="email" placeholder="Email" />
-                            <input className="sign_in_input" type="password" placeholder="Password" />
+                            <input value={email} onChange={(e) => setEmail(e.target.value)} className="sign_in_input" type="email" placeholder="Email" required/>
+                            <input value={password} onChange={(e) => setPassword(e.target.value)} className="sign_in_input" type="password" placeholder="Password" required/>
+                            <span className="text-center text-danger image_error">{loginValid}</span>
                             <a className="forgot_password" href="#">Forgot your password?</a>
-                            <button className="sign_in_page_btn">Sign In</button>
+                            {
+                                loginClicked ? <button className="sign_in_page_btn register_spin"><div className="spinner-border text-light" role="status">
+                                <span className="sr-only">Loading...</span>
+                              </div></button> : <button type="submit" onClick={(e) => emailPassLogin(e)} className="sign_in_page_btn">Sign In</button>
+                            }
                         </form>
                     </div>
                     <div className="overlay-container">
@@ -164,18 +331,44 @@ const SignIn = () => {
                         <FontAwesomeIcon onClick={handleGoogleSignIn} icon={faGoogle} />
                     </div>
                     <span className="m_sign_span">or use your account</span>
-                    {signInUp === 'signUp' && <input className="m_sign_input" type="text" placeholder="Full Name" />}
-                    <input className="m_sign_input" type="text" placeholder="Email" />
-                    <input className="m_sign_input" type="text" placeholder="Password" />
-                    <Link className="m_forgot_pass">Forgot Password!</Link>
+                    {signInUp === 'signUp' && <input value={fullName} onChange={(e) => setFullName(e.target.value)} className="sign_in_input" type="text" placeholder="Name" required/>}
+                    <input value={email} onChange={(e) => setEmail(e.target.value)} className="sign_in_input" type="email" placeholder="Email" required/>
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} className="sign_in_input" type="password" placeholder="Password" required/>
+                    {
+                        signInUp === 'signUp' && <IKContext
+                        publicKey="public_5rRmOCN1vK/MI28l98iNzt8jNhQ="
+                        urlEndpoint="https://ik.imagekit.io/ebnirpt9i8agxu"
+                        transformationPosition="path"
+                        authenticationEndpoint="https://bandhon-ecommerce.herokuapp.com/auth">
+
+                        <span className="text-center">{imageLoading && 'Uploading image'}</span>
+                        <label className="sign_in_input up_profile_sign" htmlFor="user_profile">{imageUploadTitle ? `${imageUploadTitle}` : 'Select Profile Image'}</label>
+                        <IKUpload id="user_profile" className="sign_in_input d-none" onChange={(e) => imageUpload(e)} onError={onError} onSuccess={onSuccess} fileName="user-register" />
+                    </IKContext>
+                    }
+                    <span className="text-center text-danger image_error">{imageSelect}</span>
+                    {/* {
+                        registerClicked ? <button className="sign_in_page_btn register_spin"><div className="spinner-border text-light" role="status">
+                        <span className="sr-only">Loading...</span>
+                        </div></button> : <button type="submit" onClick={(e) => registerUser(e)} className="sign_in_page_btn">Sign Up</button>
+                    } */}
+                    {
+                        signInUp === 'signIn' && <p className="m_forgot_pass">Forgot Password!</p>
+                    }
+                    <span className="text-center text-danger image_error">{loginValid}</span>
                     {
                         signInUp === 'signIn' ? <p className="m_sign_detail">Don't have an account! <span onClick={() => setSignInUp('signUp')}>Register</span></p> : <p className="m_sign_detail">Already have an account! <span onClick={() => setSignInUp('signIn')}>Sign In</span></p>
                     }
-                    <button className="m_sign_page_btn">
                     {
-                        signInUp === 'signIn' ? 'Sign In' : 'Sign Up'
+                            signInUp === 'signIn' && (loginClicked ? <button className="m_sign_page_btn register_spin"><div className="spinner-border text-light" role="status">
+                            <span className="sr-only">Loading...</span>
+                          </div></button> : <button type="submit" onClick={(e) => emailPassLogin(e)} className="m_sign_page_btn">Sign In</button>)
                     }
-                    </button>
+                    {
+                        signInUp === 'signUp' && (registerClicked ? <button className="m_sign_page_btn register_spin"><div className="spinner-border text-light" role="status">
+                        <span className="sr-only">Loading...</span>
+                        </div></button> : <button type="submit" onClick={(e) => registerUser(e)} className="m_sign_page_btn">Sign Up</button>)
+                    }
                 </form>
             </div>
         </div>

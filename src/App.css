@@ -3,6 +3,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  transition: all .3s;
 }
 
 a {
@@ -15,4 +16,8 @@ a {
   justify-content: center;
   text-align: center;
   margin: auto;
+}
+
+img {
+  pointer-events: none;
 }

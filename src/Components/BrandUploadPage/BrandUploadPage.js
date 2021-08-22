@@ -1,12 +1,34 @@
 import React, { useContext, useState } from 'react';
 import { CategoryData } from '../../App';
 import './BrandUploadPage.css'
+import { IKContext, IKUpload } from 'imagekitio-react';
 
 const BrandUploadPage = () => {
     const [categories, setCategories] = useContext(CategoryData)
     const [selectedCategory, setSelectedCategory] = useState('')
     const [brandName, setBrandName] = useState('')
-    const [brandImage, setBrandImage] = useState()
+    // const [brandImage, setBrandImage] = useState()
+
+    // uploading image and getting link
+    const [imageLoading, setImageLoading] = useState(false)
+    const [imageLink, setImageLink] = useState('')
+    const onError = err => {
+        setImageLoading(false)
+        setImageLink('')
+    };
+      
+    const onSuccess = res => {
+        setImageLoading(false)
+        setImageLink(res.url)
+    };
+
+    const imageUpload = (e) => {
+        if(e.target.value){
+            setImageLink('')
+            setImageLoading(true)
+        }
+    }
+
     const select_category = (e) => {
         setSelectedCategory(e.target.value)
     }
@@ -16,9 +38,9 @@ const BrandUploadPage = () => {
         e.preventDefault()
         if(category) {
             if(brandName) {
-                if(brandImage) {
+                if(imageLink) {
                     let data = {...category}
-                    let brands = {brandName, brandImage, brandCategory:selectedCategory, id:randomId}
+                    let brands = {brandName, brandImage:imageLink, brandCategory:selectedCategory, id:randomId}
                     if (data.brands) {
                         data.brands =  [...category.brands, brands]
                     }
@@ -77,7 +99,19 @@ const BrandUploadPage = () => {
                 </div>
                 <div className="brand_image brand_field_div">
                     <label htmlFor="brand_image">Upload Brand Image</label>
-                    <input onChange={(e) => setBrandImage(e.target.value)} id="brand_image" type="text" placeholder="Brand Image Link..."/>
+                    {/* <input onChange={(e) => setBrandImage(e.target.value)} id="brand_image" type="text" placeholder="Brand Image Link..."/> */}
+                    <IKContext
+                        publicKey="public_5rRmOCN1vK/MI28l98iNzt8jNhQ="
+                        urlEndpoint="https://ik.imagekit.io/ebnirpt9i8agxu"
+                        transformationPosition="path"
+                        authenticationEndpoint="https://bandhon-ecommerce.herokuapp.com/auth">
+
+                        <h1>{imageLoading && 'uploading image'}</h1>
+                        {
+                            imageLink && <img className="CP_image_upload_show" src={imageLink} alt="" />
+                        }
+                        <IKUpload onChange={(e) => imageUpload(e)} onError={onError} onSuccess={onSuccess} fileName="my-upload" />
+                    </IKContext>
                 </div>
                 <button onClick={upload_brand} className="brand_upload_btn">Upload</button>
             </form>

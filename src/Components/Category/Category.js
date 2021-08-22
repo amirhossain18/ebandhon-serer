@@ -43,7 +43,7 @@ const Category = () => {
                   <h2>All Products</h2>
                   <div className="cat_products_list">
                      {
-                        selectedCategory.products ? selectedCategory.products.map(product => <Link to={`/product/${product.productCategory}/${product.id}`} className="cat_single_product">
+                        selectedCategory.products ? selectedCategory.products.map((product, index) => <Link key={index} to={`/product/${product.productCategory}/${product.id}`} className="cat_single_product">
                            <img src={product.productImage} alt="" />
                            <p>{product.productName}</p>
                            <span>৳ {product.productPrice} (-{product.productDiscount}%)</span>

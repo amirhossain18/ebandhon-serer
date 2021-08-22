@@ -1,0 +1,20 @@
+.main-1{
+    background-color:#126cc5;
+ 
+}
+
+.main-2{
+    margin: 2px
+}
+h1.headline {
+    font-size: 45px;
+    color: greenyellow;
+}
+.h1, h1 {
+    font-size: 3.0rem;
+    font-weight: 600;
+}
+
+p{
+    margin: 3px;
+}

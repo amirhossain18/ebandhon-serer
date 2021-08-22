@@ -78,9 +78,10 @@
         width: 90% !important;
     }
 
-    .home_products_heading h1 {
-        font-size: 16px !important;
-        padding: 9px 30px !important;
+    .home_category_show_all {
+        font-size: 15px !important;
+        width: 200px !important;
+        padding: 9px 20px !important;
     }
 
     .brands_products p {
@@ -98,7 +99,7 @@
     }
 
     .home_products_show {
-        margin-top: 30px !important;
+        margin-top: 15px !important;
     }
 
     .drag_scroll_products div {
@@ -352,6 +353,199 @@
     .lucky_winner_page_slogan {
         font-size: 13px !important;
     }
+
+    .cart_shipment {
+        height: 500px !important;
+        padding: 20px 85px !important;
+    }
+
+    .shipment_h1 {
+        margin-bottom: 10px !important;
+        margin-top: 5px !important;
+    }
+
+    .shipment_field label {
+        font-size: 14px !important;
+    }
+
+    .shipment_field input {
+        font-size: 13px !important;
+        padding: 7px 15px !important;
+    }
+
+    .shipment_field {
+        margin: 10px 0 !important;
+    }
+
+    .sub_address {
+        margin-top: 7px !important;
+    }
+
+    .sub_address select {
+        padding: 6px 7px !important;
+        font-size: 13px !important;
+    }
+
+    .select_error {
+        font-size: 11px !important;
+    }
+
+    .CP_detail_head_details span {
+        font-size: 13px !important;
+    }
+
+    .CP_detail_head_details h4 {
+        font-size: 21px !important;
+    }
+
+    .CP_detail_product h5 {
+        font-size: 12px !important;
+    }
+
+    .CP_buy_now_btn {
+        padding: 6px 20px !important;
+        font-size: 13px !important;
+    }
+
+    .CP_main_price {
+        font-size: 12px !important;
+    }
+
+    .CP_price {
+        font-size: 15px !important;
+    }
+
+    .CP_full_price {
+        padding: 4px 0 !important;
+    }
+
+    .campaign_go_top {
+        font-size: 30px !important;
+    }
+
+    .CP_detail {
+        margin-top: 35px !important;
+    }
+
+    #CP_shipment_h1 {
+        margin-bottom: 15px !important;
+        margin-top: 5px !important;
+    }
+
+    #CP_shipment {
+        padding: 20px 40px !important;
+        height: auto !important;
+        padding-bottom: 5px !important;
+    }
+
+    #CP_shipment_field {
+        margin: 5px 0 !important;
+    }
+
+    #CP_sub_address {
+        margin-top: 3px !important;
+    }
+
+    .CP_shipment_product img {
+        width: 50px !important;
+    }
+
+    .CP_shipment_product h4 {
+        font-size: 13px !important;
+    }
+    
+    .CP_quantity {
+        font-size: 11px !important;
+    }
+
+    .CP_shipment_price {
+        width: 55px !important;
+        font-size: 14px !important;
+    }
+
+    .CP_payment_btn button {
+        padding: 8px 15px !important;
+        font-size: 13px !important;
+    }
+
+    .drag_scroll_products img {
+        width: 140px !important;
+    }
+
+    .drag_scroll_product {
+        margin: 0 10px !important;
+        width: 150px !important;
+    }
+
+    .CP_shipment_price_total_child {
+        font-size: 12px !important;
+    }
+    
+    .profile_page_profile_photo {
+        width: 225px !important;
+        height: 225px !important;
+    }
+    
+    .profile_page_my_profile {
+        font-size: 20px !important;
+    }
+
+    .profile_page_input,
+    .profile_page_input_div {
+        height: 37px !important;
+        font-size: 14px !important;
+    }
+    
+    #profile_page_uid {
+        height: 37px !important;
+        width: 40px !important;
+        padding: 11px !important;
+    }
+
+    .PP_UID_hidden {
+        font-size: 20px !important;
+    }
+
+    .profile_left {
+        height: 500px !important;
+    }
+
+    .profile_right_single_section h1 {
+        font-size: 20px !important;
+    }
+
+    .profile_right_single_section h1::after {
+        border-bottom: 2px solid rgb(230 230 230) !important;
+    }
+
+    .PPR_single_campaign_product_image {
+        width: 65px !important;
+        height: 65px !important;
+    }
+
+    .PPR_single_campaign_product_title_quantity h4 {
+        font-size: 15px !important;
+    }
+
+    .PPR_single_campaign_product_title_quantity span {
+        font-size: 11px !important;
+    }
+
+    .PPR_single_campaign_product_price span:nth-child(1) {
+        font-size: 13px !important;
+    }
+
+    .PPR_single_campaign_product_price span:last-child {
+        font-size: 18px !important;
+    }
+
+    .profile_right_single_section {
+        padding-bottom: 25px !important;
+    }
+
+    .PPR_campaign_data {
+        max-height: 335px !important;
+    }
 }
 
 @media (max-width: 991px) {
@@ -411,8 +605,9 @@
         font-size: 10px !important;
     }
 
-    .home_products_heading h1 {
+    .home_category_show_all {
         font-size: 13px !important;
+        width: 180px !important;
     }
 
     .products_category_search {
@@ -518,6 +713,61 @@
     .cart_show p {
         width: 80px !important;
     }
+
+    .cart_shipment {
+        padding: 30px 25px !important;
+    }
+
+    .shipment_h1 {
+        margin-top: -5px !important;
+    }
+
+    .sub_address {
+        width: 47% !important;
+        margin: 1.5% !important;
+        margin-top: 7px !important;
+    }
+
+    .CP_detail_head_details span {
+        font-size: 12px !important;
+    }
+
+    .CP_detail_product {
+        width: 23.4% !important;
+        margin: .8% !important;
+        margin-top: 25px !important;
+    }
+
+    .CP_buy_now_btn {
+        padding: 5px 20px !important;
+        font-size: 12px !important;
+    }
+
+    .CP_detail_product {
+        margin-top: 20px !important;
+    }
+
+    #CP_shipment {
+        max-width: 100% !important;
+    }
+
+    .profile_left {
+        width: 44% !important;
+    }
+
+    .profile_right {
+        margin-left: 1% !important;
+    }
+
+    .profile_right_single_section {
+        padding: 20px 25px !important;
+        padding-bottom: 25px !important;
+        margin: 25px !important;
+    }
+
+    .PPR_single_campaign_product_title_quantity h4 {
+        font-size: 14px !important;
+    }
 }
 
 @media(max-width: 767px){
@@ -562,9 +812,10 @@
         margin-top: 30px !important;
     }
 
-    .home_products_heading h1 {
+    .home_category_show_all {
         font-size: 12px !important;
         padding: 8px 20px !important;
+        width: 165px !important;
     }
 
     .brands_products p {
@@ -577,7 +828,7 @@
     }
 
     .home_single_category_products {
-        margin-top: 30px !important;
+        /* margin-top: 30px !important; */
     }
 
     .drag_scroll_brands img {
@@ -589,7 +840,7 @@
     }
 
     .home_products_show {
-        margin-top: 25px !important;
+        margin-top: 20px !important;
     }
 
     .footer_options {
@@ -691,6 +942,64 @@
     .cart_page {
         height: auto !important;
     }
+
+    .cart_page {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .sub_address {
+        width: 45% !important;
+        margin: 2.5% !important;
+        margin-top: 5px !important;
+    }
+
+    .CP_header a {
+        width: 23% !important;
+        margin: 0 1% !important;
+    }
+
+    .CP_detail_head {
+        flex-direction: column !important;
+    }
+
+    .CP_detail_head img {
+        width: 100% !important;
+        margin-right: 0 !important;
+    }
+
+    .CP_detail_head_details {
+        width: 100% !important;
+        margin-top: 15px !important;
+    }
+
+    .CP_detail_head_details h4 {
+        margin-bottom: 3px !important;
+    }
+
+    .CP_detail {
+        padding: 20px !important;
+    }
+
+    .CP_detail_product {
+        width: 31.7% !important;
+        margin: .8% !important;
+        margin-top: 20px !important;
+    }
+
+    .main_profile {
+        display: block !important;
+    }
+
+    .profile_left,
+    .profile_right {
+        width: 100% !important;
+        margin: 0 25px !important;
+    }
+
+    .profile_right_single_section {
+        margin: 25px 0 !important;
+    }
 }
 
 @media(max-width: 575px){
@@ -776,9 +1085,10 @@
         font-size: 11px !important;
     }
 
-    .home_products_heading h1 {
+    .home_category_show_all {
         font-size: 11px !important;
         padding: 8px 10px !important;
+        width: 160px !important;
     }
 
     .products_category_search {
@@ -800,7 +1110,7 @@
     }
 
     .drag_scroll_brands img {
-        width: 60px !important;
+        width: 85px !important;
     }
 
     .drag_scroll_products div {
@@ -1015,7 +1325,153 @@
     .m_sign_in_page {
         display: flex !important;
     }
+
+    .shipment_h1 {
+        margin-bottom: -10px !important;
+        margin-top: -15px !important;
+    }
+
+    .shipment_h1 {
+        font-size: 24px !important;
+    }
+
+    .shipment_field label {
+        font-size: 13px !important;
+    }
+
+    .shipment_field input {
+        font-size: 12px !important;
+        padding: 7px 12px !important;
+    }
+
+    .sub_address select {
+        font-size: 12px !important;
+    }
+    
+    .cart_shipment {
+        height: 455px !important;
+    }
+
+    .navbar {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-evenly !important;
+    }
+
+    .footer {
+        margin-bottom: 40px !important;
+    }
+
+    .CP_header {
+        margin-top: 30px !important;
+    }
+
+    .CP_detail {
+        margin-top: 30px !important;
+    }
+
+    .CP_detail_head_details span {
+        font-size: 11px !important;
+    }
+
+    .CP_detail_head_details h4 {
+        font-size: 20px !important;
+    }
+
+    .CP_detail {
+        padding: 15px !important;
+    }
+
+    .CP_detail_product {
+        width: 46% !important;
+        margin: 2% !important;
+        margin-top: 15px !important;
+        padding: 15px !important;
+    }
+
+    .CP_detail_product h5 {
+        font-size: 11px !important;
+    }
+
+    .CP_main_price {
+        font-size: 11px !important;
+        margin-right: 6px !important;
+    }
+
+    .CP_price {
+        font-size: 14px !important;
+    }
+
+    .CP_buy_now_btn {
+        font-size: 11px !important;
+    }
+
+    .campaign_go_top {
+        font-size: 25px !important;
+    }
+
+    #CP_sub_address {
+        margin-bottom: 0 !important;
+    }
+
+    .CP_shipment_product h4 {
+        font-size: 11px !important;
+    }
+
+    .CP_quantity {
+        font-size: 10px !important;
+    }
+
+    .CP_shipment_price {
+        width: 49px !important;
+        font-size: 13px !important;
+    }
+
+    .CP_shipment_product img {
+        width: 45px !important;
+    }
+
+    .CP_payment_btn button {
+        font-size: 12px !important;
+    }
+
+    .CP_close_modal {
+        font-size: 22px !important;
+    }
+
+    .CP_shipment_price_total_child {
+        font-size: 11px !important;
+    }
+
+    .profile_left,
+    .profile_right {
+        margin: 0 !important;
+    }
+
+    .profile_page_profile_photo {
+        width: 200px !important;
+        height: 200px !important;
+    }
+
+    .profile_page_input,
+    .profile_page_input_div {
+        font-size: 13px !important;
+        height: 40px !important;
+    }
+
+    .PP_UID_hidden {
+        font-size: 15px !important;
+    }
+
+    .profile_left {
+        height: 485px !important;
+    }
+
+    .PPR_single_campaign_product_price span:last-child {
+        font-size: 16px !important;
+    }
+
+    .PPR_single_campaign_product_price span:nth-child(1) {
+        font-size: 12px !important;
+    }
 }
-
-
-

@@ -33,8 +33,8 @@ const Brandproduct = () => {
                <h2>All Products</h2>
                <div className="bp_products_list cat_products_list">
                   {
-                     selectedBrandProduct ? selectedBrandProduct.map(product => <Link className="bp_single_product cat_single_product" to={`/product/${product.productCategory}/${product.id}`}>
-                     <div key={product.id} >
+                     selectedBrandProduct ? selectedBrandProduct.map(product => <Link key={product.id} className="bp_single_product cat_single_product" to={`/product/${product.productCategory}/${product.id}`}>
+                     <div>
                         <img src={product.productImage} alt="" />
                         <p>{product.productName}</p>
                         <span>৳ {product.productPrice} (-{product.productDiscount}%)</span>

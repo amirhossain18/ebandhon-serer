@@ -6,10 +6,12 @@ import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { ToastProvider, useToasts } from 'react-toast-notifications';
 import useLocalStorage from '../../LocalStorage/LocalStorage';
+import defaultImage from '../../../images/Spin-1.6s-200px.gif'
 
 const CartShow = (props) => {
     const { addToast } = useToasts();
     const [cartInfo, setCartInfo] = useContext(CartProducts)
+    const [imageLoad, setImageLoad] = useState(false)
     // const [cartSubTotal, setCartSubTotal] = useContext(CartSubTotal)
     const {id, quantity, productCategory} = props.data;
     const [categories, setCategories] = useContext(CategoryData)
@@ -33,12 +35,11 @@ const CartShow = (props) => {
         .then(res => res.json())
         .then(data => {
             if (data.modifiedCount !== 0) {
-                fetch('https://bandhon-ecommerce.herokuapp.com/get-user-data')
+                fetch(`https://bandhon-ecommerce.herokuapp.com/get-user-data/id?id=${loginData.uid}`)
                 .then(response => response.json())
                 .then(data => {
-                    if(loginData) {
-                        const myData = data?.find(user => user.uid === loginData.uid)
-                        setCartInfo(myData)
+                    if(loginData.isSignedIn) {
+                        setCartInfo(data)
                         addToast('Product successfully deleted from cart', { appearance: 'error', autoDismiss: true, autoDismissTimeout: 3000 })
                     }
                 })
@@ -58,7 +59,10 @@ const CartShow = (props) => {
                         }
                     </div>
                     <div className="cart_show_info">
-                        <img src={cartedProduct.productImage} alt="" />
+                        <img className="d-none" onLoad={() => setImageLoad(true)}src={cartedProduct.productImage} alt="" />
+                        {
+                            imageLoad === true ? <img src={cartedProduct.productImage} alt="" /> : <img src={defaultImage} alt="" />
+                        }
                         <div className="cart_show_middle">
                             <h3>{cartedProduct.productName}</h3>
                             <span>Quantity: {quantity}</span>

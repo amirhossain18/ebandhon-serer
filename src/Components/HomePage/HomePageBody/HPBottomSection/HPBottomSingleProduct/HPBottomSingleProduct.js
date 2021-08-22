@@ -5,6 +5,8 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { CategoryData } from '../../../../../App';
 import { Link } from 'react-router-dom';
+import HPBottomOneProduct from './HPBottomOneProduct/HPBottomOneProduct';
+import HPBottomOneBrand from './HPBottomOneBrand/HPBottomOneBrand';
 
 
 const HPBottomSingleProduct = (props) => {
@@ -21,7 +23,7 @@ const HPBottomSingleProduct = (props) => {
             {
                 selectedCategoryData && <div className="home_single_category_products">
                     <div className="home_products_heading">
-                        <h1>{selectedCategoryData.name}</h1>
+                        <Link className="home_category_show_all" to={`/category/${selectedCategoryData.name}`}>{selectedCategoryData.name}</Link>
                         <div className="brands_products">
                             <p className={`${selection === 'brands' && 'brands_product_active'}`} onClick={() => setSelection('brands')}>Brands</p>
                             <p className={`${selection === 'products' && 'brands_product_active'}`} onClick={() => setSelection('products')}>All Product</p>
@@ -37,7 +39,7 @@ const HPBottomSingleProduct = (props) => {
                                 <ScrollContainer className="scroll-container">
                                     <div className="drag_scroll_brands">
                                         {
-                                            selectedCategoryData ? selectedCategoryData.brands?.map(data => <Link to={`/brand/${data.brandCategory}/${data.brandName}`} key={data._id}><img src={data.brandImage} alt="" /></Link>) : <h1>loading data</h1>
+                                            selectedCategoryData ? selectedCategoryData.brands?.map((data, index) => <HPBottomOneBrand data={data} key={index}/>) : <h1>loading data</h1>
                                         }
                                     </div>
                                 </ScrollContainer>
@@ -45,12 +47,7 @@ const HPBottomSingleProduct = (props) => {
                                 <ScrollContainer className="scroll-container">
                                     <div className="drag_scroll_products">
                                         {
-                                            selectedCategoryData ? selectedCategoryData.products?.map(data => 
-                                            <Link key={data.id} to={`/product/${data.productCategory}/${data.id}`}>
-                                                <img src={data.productImage} alt="" />
-                                                <p>{data.productName}</p>
-                                                <span>৳ {data.productPrice} (-{data.productDiscount}%)</span>
-                                            </Link>) : <h1>loading data</h1>
+                                            selectedCategoryData ? selectedCategoryData.products?.map((data, index) => <HPBottomOneProduct data={data} key={index}/>) : <h1>loading data</h1>
                                         }
                                     </div>
                                 </ScrollContainer>  

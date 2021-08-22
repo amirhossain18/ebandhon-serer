@@ -1,0 +1,20 @@
+.main-1{
+    margin-top: 30px;
+}
+
+.main-2{
+    margin: 2px
+}
+h1.headline {
+    font-size: 45px !important;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.main-1 h1 {
+    font-size: 3.0rem;
+    font-weight: 600;
+}
+
+.main-1 p{
+    margin: 3px;
+}

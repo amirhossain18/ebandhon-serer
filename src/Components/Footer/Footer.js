@@ -3,6 +3,7 @@ import './Footer.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSnapchatSquare, faTwitter, faFacebookSquare, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faPhoneAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -11,11 +12,10 @@ const Footer = () => {
                 <div className="footer_details">
                     <div className="footer_menu footer_options">
                         <h1>MENU</h1>
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Cookie Policy</a>
-                        <a href="#">Purchasing Policy</a>
-                        <a href="#">Terms & Conditions</a>
-                        <a href="#">Career</a>
+                        <Link to="/privacy-policy">Privacy Policy</Link>
+                        <Link to="/cookie-policy">Cookie Policy</Link>
+                        <Link to="/terms-conditions">Terms & Conditions</Link>
+                        <Link to="/career">Career</Link>
                     </div>
                     <div className="footer_contact footer_options">
                         <h1>CONTACT US</h1>

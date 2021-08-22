@@ -1,12 +1,17 @@
 .home_page_top_section {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 25px;
 }
 
 .categories_side {
     display: flex;
     flex-direction: column;
     width: 250px;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 }
 
 .categories_single_name {

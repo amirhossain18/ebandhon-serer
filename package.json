@@ -1,6 +1,7 @@
 {
-  "name": "bandhon-ecommerce",
+  "name": "Ebandhon",
   "version": "0.1.0",
+  "homepage": "https://ebandhon.com/",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
@@ -13,6 +14,7 @@
     "@testing-library/user-event": "^12.8.3",
     "bootstrap-icons": "^1.5.0",
     "firebase": "^8.7.0",
+    "imagekitio-react": "^1.0.10",
     "install": "^0.13.0",
     "node-sass": "^6.0.1",
     "npm": "^7.19.0",
@@ -20,13 +22,16 @@
     "react-bootstrap-icons": "^1.5.0",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.10.0",
+    "react-id-generator": "^3.0.1",
     "react-image-magnify": "^2.7.4",
     "react-indiana-drag-scroll": "^2.0.1",
+    "react-modal": "^3.14.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-slick": "^0.28.1",
     "react-timer-hook": "^3.0.4",
     "react-toast-notifications": "^2.5.1",
+    "react-uuid": "^1.0.2",
     "slick-carousel": "^1.8.1",
     "swiper": "^6.7.1",
     "web-vitals": "^1.1.2"

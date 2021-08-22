@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { CategoryData } from '../../App';
 import './ProductUploadPage.css';
 import { useForm } from "react-hook-form";
+import { IKContext, IKUpload } from 'imagekitio-react';
 
 
 
@@ -10,6 +11,26 @@ const UploadPage  = () => {
   const [selectedCategory, setSelectedCategory] = useState('Motor Bike')
   const [descriptionInput, setDescriptionInput] = useState([{id:0}])
   const [selectedBrand, setSelectedBrand] = useState('')
+
+  // uploading image and getting link
+  const [imageLoading, setImageLoading] = useState(false)
+  const [imageLink, setImageLink] = useState('')
+  const onError = err => {
+      setImageLoading(false)
+      setImageLink('')
+  };
+    
+  const onSuccess = res => {
+      setImageLoading(false)
+      setImageLink(res.url)
+  };
+
+  const imageUpload = (e) => {
+      if(e.target.value){
+          setImageLink('')
+          setImageLoading(true)
+      }
+  }
    
   const select_category = (e) => {
     setSelectedCategory(e.target.value)
@@ -38,7 +59,7 @@ const UploadPage  = () => {
       alert('Please select a brand first.')
     }
     else {
-      let products = {...data, productCategory:selectedCategory, productBrand:selectedBrand, id:randomId}
+      let products = {...data, productImage:imageLink, productCategory:selectedCategory, productBrand:selectedBrand, id:randomId}
       // console.log(products)
       let catData = {...category}
       if (catData.products) {
@@ -95,7 +116,19 @@ const UploadPage  = () => {
         </div>
         <div className="upload_product_name product_field">
           <label htmlFor="product_image">Product Image</label>
-          <input {...register("productImage")} id="product_image" type="text" placeholder="Product Image..." required/>
+          {/* <input {...register("productImage")} id="product_image" type="text" placeholder="Product Image..." required/> */}
+          <IKContext
+            publicKey="public_5rRmOCN1vK/MI28l98iNzt8jNhQ="
+            urlEndpoint="https://ik.imagekit.io/ebnirpt9i8agxu"
+            transformationPosition="path"
+            authenticationEndpoint="https://bandhon-ecommerce.herokuapp.com/auth">
+
+            <h1>{imageLoading && 'uploading image'}</h1>
+            {
+                imageLink && <img className="CP_image_upload_show" src={imageLink} alt="" />
+            }
+            <IKUpload onChange={(e) => imageUpload(e)} onError={onError} onSuccess={onSuccess} fileName="my-upload" />
+          </IKContext>
         </div>
         <div className="upload_details product_field">
           <label htmlFor="product_details">Product Quantity</label>
@@ -110,13 +143,13 @@ const UploadPage  = () => {
           <input {...register("productDiscount")} id="upload_discount" type="number" placeholder="Discount(%)" required/>
         </div>
         {
-          descriptionInput.map(data => <div className="upload_product_name product_field">
+          descriptionInput.map((data, index) => <div key={index} className="upload_product_name product_field">
               <label htmlFor={`product_description_${data.id}`}>Product Description {data.id}</label>
               <input {...register(`productDescription${data.id}`)} id={`product_description_${data.id}`} type="text" placeholder={`Product Description ${data.id}...`} required/>
             </div>)
         }
         <button>Upload</button>
-        <button type="submit" onClick={add_box} class="m-2">Add Description Box</button>
+        <button type="submit" onClick={add_box} className="m-2">Add Description Box</button>
       </form>
     </div>
   );

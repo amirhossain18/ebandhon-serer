@@ -95,12 +95,11 @@ const Productview = () => {
         .then(res => res.json())
         .then(data => {
             if (data.modifiedCount !== 0) {
-                fetch('https://bandhon-ecommerce.herokuapp.com/get-user-data')
+                fetch(`https://bandhon-ecommerce.herokuapp.com/get-user-data/id?id=${loginData.uid}`)
                 .then(response => response.json())
                 .then(data => {
-                    if(loginData) {
-                        const myData = data?.find(user => user.uid === loginData.uid)
-                        setCartInfo(myData)
+                    if(loginData.isSignedIn) {
+                        setCartInfo(data)
                         addToast('Product updated to Cart Successfully', { appearance: 'success', autoDismiss: true, autoDismissTimeout: 3000 })
                         setUpdateLoading(false)
                     }
@@ -116,7 +115,7 @@ const Productview = () => {
         const discountedPrice = (selectedProduct.productPrice * selectedProduct.productDiscount) / 100
         const mainPrice = selectedProduct.productPrice - discountedPrice
         const cartData = [{id:selectedProduct.id, quantity:quantity, productCategory:selectedProduct.productCategory, mainPrice:mainPrice}]
-        if (cartInfo.cartProducts) {
+        if (cartInfo?.cartProducts) {
             const userCartData = [...cartInfo.cartProducts, {id:selectedProduct.id, quantity:quantity, productCategory:selectedProduct.productCategory, mainPrice:mainPrice}]
             fetch(`https://bandhon-ecommerce.herokuapp.com/add-cart-product/id?id=${cartInfo._id}`, {
                 method:'PATCH',
@@ -126,12 +125,11 @@ const Productview = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch('https://bandhon-ecommerce.herokuapp.com/get-user-data')
+                    fetch(`https://bandhon-ecommerce.herokuapp.com/get-user-data/id?id=${loginData.uid}`)
                     .then(response => response.json())
                     .then(data => {
-                        if(loginData) {
-                            const myData = data?.find(user => user.uid === loginData.uid)
-                            setCartInfo(myData)
+                        if(loginData.isSignedIn) {
+                            setCartInfo(data)
                             addToast('Product added to Cart Successfully', { appearance: 'success', autoDismiss: true, autoDismissTimeout: 3000 })
                             setLoading(false)
                         }
@@ -140,6 +138,7 @@ const Productview = () => {
             })
         }
         else {
+            // console.log(cartInfo)
             fetch(`https://bandhon-ecommerce.herokuapp.com/add-cart-product/id?id=${cartInfo._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
@@ -148,12 +147,11 @@ const Productview = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch('https://bandhon-ecommerce.herokuapp.com/get-user-data')
+                    fetch(`https://bandhon-ecommerce.herokuapp.com/get-user-data/id?id=${loginData.uid}`)
                     .then(response => response.json())
                     .then(data => {
-                        if(loginData) {
-                            const myData = data?.find(user => user.uid === loginData.uid)
-                            setCartInfo(myData)
+                        if(loginData.isSignedIn) {
+                            setCartInfo(data)
                             addToast('Product added to Cart Successfully', { appearance: 'success', autoDismiss: true, autoDismissTimeout: 3000 })
                             setLoading(false)
                         }
@@ -202,7 +200,10 @@ const Productview = () => {
                         </div>
                         {
                             loginData.uid ? (alreadyAdded ? (updateLoading === true ? <button className="add_cart_btn">Updating...</button> : <button onClick={(e) => updateCartBtn(e)} className="add_cart_btn">Update Cart</button>) : 
-                            (loading === true ? <button className="add_cart_btn">Adding...</button> : <button title="You must login before added to cart!" onClick={(e) => addCartBtn(e)} className="add_cart_btn">Add to cart</button>)) : <Link to="/signIn" ><button className="add_cart_btn">Add to cart</button></Link>
+                            (loading === true ? <button className="add_cart_btn">Adding...</button> : <button title="You must login before added to cart!" onClick={(e) => addCartBtn(e)} className="add_cart_btn">Add to cart</button>)) : <Link to={{ 
+                                pathname: `/signIn`,
+                                state: location.pathname
+                              }}><button className="add_cart_btn">Add to cart</button></Link>
                         }
                     </div>
                 </div>
