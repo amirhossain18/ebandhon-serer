@@ -18,13 +18,13 @@
     margin: 0;
     text-align: center;
     margin-bottom: 20px;
-    margin-top: 15px;
+    margin-top: -5px;
 }
 
 .shipment_field {
     display: flex;
     flex-direction: column;
-    margin: 15px 0;
+    margin: 5px 0;
 }
 
 .shipment_field label {
@@ -130,8 +130,8 @@
 .sub_address {
     display: flex;
     flex-direction: column;
-    margin: 0 2.5%;
-    width: 45%;
+    margin: 0 !important;
+    width: 100%;
     margin-top: 10px;
 }
 
@@ -141,7 +141,7 @@
 
 .sub_address select {
     outline: none;
-    padding: 7px 10px;
+    padding: 10px;
     font-size: 14px;
     border-radius: 3px;
     border: 1px solid lightgray;
@@ -152,4 +152,11 @@
     margin-bottom: 0;
     font-size: 12px;
     text-align: center;
+}
+
+.CPS_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
 }

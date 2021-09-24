@@ -1,0 +1,67 @@
+.hot_deal {
+    background-color: #eaf1ff;
+    margin-bottom: -50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+}
+
+.HDSP {
+    width: 23%;
+    margin: 12px 1%;
+    background: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.HDSP_image img {
+    width: 100%;
+    height: auto;
+}
+
+.HDSP_head_text {
+    margin: 0;
+    color: rgb(73, 73, 73);
+    font-size: 14px;
+}
+
+.HDSP_buy_btn {
+    color: white;
+    border: none;
+    background-image: linear-gradient(45deg, #FF4B2B, #FF416C);
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.HDSP_dis_hidden {
+    position: absolute;
+    top: 15px;
+    left: -45px;
+    color: white !important;
+    background-color: #ff3838;
+    width: 150px;
+    height: 29px;
+    transform: rotateZ(-45deg);
+}
+
+.default_loader  {
+    margin: auto;
+    display: block;
+    margin-top: 75px;
+    margin-bottom: 75px;
+}
+
+.hot_deal_header {
+    background: #eaf1ff;
+    padding-top: 35px;
+}

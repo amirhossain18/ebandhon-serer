@@ -26,6 +26,8 @@
     "react-image-magnify": "^2.7.4",
     "react-indiana-drag-scroll": "^2.0.1",
     "react-modal": "^3.14.3",
+    "react-outside-click-handler": "^1.3.0",
+    "react-ripples": "^2.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-slick": "^0.28.1",

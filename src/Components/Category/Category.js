@@ -44,9 +44,14 @@ const Category = () => {
                   <div className="cat_products_list">
                      {
                         selectedCategory.products ? selectedCategory.products.map((product, index) => <Link key={index} to={`/product/${product.productCategory}/${product.id}`} className="cat_single_product">
+                           <p className="product_dis_home">-{product.productDiscount}%</p>
                            <img src={product.productImage} alt="" />
                            <p>{product.productName}</p>
-                           <span>৳ {product.productPrice} (-{product.productDiscount}%)</span>
+                           {/* <span>৳ {product.productPrice} (-{product.productDiscount}%)</span> */}
+                           <div className="drag_scroll_product drag_scroll_product_price">
+                              <span title={product.productPrice}>৳ <del>{product.productPrice}</del> (-{product.productDiscount}%)</span>
+                              <span>৳ {Math.round(product.productPrice - ((product.productPrice * product.productDiscount) / 100))}</span>
+                           </div>
                         </Link>) : <h1>No products found</h1>
                      }
                   </div>

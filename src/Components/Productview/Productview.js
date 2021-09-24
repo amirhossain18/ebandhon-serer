@@ -113,7 +113,7 @@ const Productview = () => {
         e.preventDefault()
         setLoading(true)
         const discountedPrice = (selectedProduct.productPrice * selectedProduct.productDiscount) / 100
-        const mainPrice = selectedProduct.productPrice - discountedPrice
+        const mainPrice = Math.round(selectedProduct.productPrice - discountedPrice)
         const cartData = [{id:selectedProduct.id, quantity:quantity, productCategory:selectedProduct.productCategory, mainPrice:mainPrice}]
         if (cartInfo?.cartProducts) {
             const userCartData = [...cartInfo.cartProducts, {id:selectedProduct.id, quantity:quantity, productCategory:selectedProduct.productCategory, mainPrice:mainPrice}]
@@ -187,7 +187,7 @@ const Productview = () => {
                         <h2>{selectedProduct.productName}</h2>
                         <p className="product_page_brand">Brand: <Link to={`/brand/${selectedProduct.productCategory}/${selectedProduct.productBrand}`}>{selectedProduct.productBrand} | More product from {selectedProduct.productBrand}</Link></p>
                         <div className="product_page_discount">
-                            <span className="product_page_price">৳ {selectedProduct.productPrice - discountedPrice}</span>
+                            <span className="product_page_price">৳ {Math.round(selectedProduct.productPrice - discountedPrice)}</span>
                             <span title={`৳ ${selectedProduct.productPrice}`}>৳ {selectedProduct.productPrice}</span>
                             <span>-{selectedProduct.productDiscount}%</span>
                         </div>

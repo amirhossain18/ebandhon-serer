@@ -16,12 +16,12 @@ const SignIn = () => {
         document.title = "Sign In | E-Bandhon"
       }, [])
 
-    const [signInUp, setSignInUp] = useState('signIn')
+    const [signInUp, setSignInUp] = useState('signUp')
 
     let history = useHistory();
     let location = useLocation();
 
-    let { from } = location.state || { from: { pathname: "/" } };
+    let { from } = location.state || { from: { pathname: "/hot-deal" } };
     // console.log(from)
 
     const [signedInUser, setSignedInUser] = useContext(UserData)
@@ -69,7 +69,7 @@ const SignIn = () => {
                                 history.replace(from);
                             }
                             else {
-                                history.replace({pathname: '/'});
+                                history.replace({pathname: '/hot-deal'});
                             }
                         }
                         else{
@@ -94,7 +94,7 @@ const SignIn = () => {
                         history.replace(from);
                     }
                     else {
-                        history.replace({pathname: '/'});
+                        history.replace({pathname: '/hot-deal'});
                     }
                 }
                 else {
@@ -115,7 +115,7 @@ const SignIn = () => {
                                 history.replace(from);
                             }
                             else {
-                                history.replace({pathname: '/'});
+                                history.replace({pathname: '/hot-deal'});
                             }
                         }
                         else{
@@ -157,7 +157,7 @@ const SignIn = () => {
         if(fullName) {
             if(email) {
                 if(password) {
-                    if(imageLink){
+                    // if(imageLink){
                         setRegisterClicked(true)
                         setImageSelect('')
                         const uid = uuid().replaceAll('-', '@')
@@ -185,14 +185,14 @@ const SignIn = () => {
                                     history.replace(from);
                                 }
                                 else {
-                                    history.replace({pathname: '/'});
+                                    history.replace({pathname: '/hot-deal'});
                                 }
                             }
                         })
-                    }
-                    else {
-                        setImageSelect('Please select a profile picture.')
-                    }
+                    // }
+                    // else {
+                    //     setImageSelect('Please select a profile picture.')
+                    // }
                 }
                 else {
                     setImageSelect('Please write your password.')
@@ -237,7 +237,7 @@ const SignIn = () => {
                             history.replace(from);
                         }
                         else {
-                            history.replace({pathname: '/'});
+                            history.replace({pathname: '/hot-deal'});
                         }
                     }
                 })
@@ -264,9 +264,9 @@ const SignIn = () => {
                             </div>
                             <span className="sign_in_span">or use your email for registration</span> */}
                             <input value={fullName} onChange={(e) => setFullName(e.target.value)} className="sign_in_input" type="text" placeholder="Name" required/>
-                            <input value={email} onChange={(e) => setEmail(e.target.value)} className="sign_in_input" type="email" placeholder="Email" required/>
+                            <input value={email} onChange={(e) => setEmail(e.target.value)} className="sign_in_input" type="email" placeholder="Email or Phone Number" required/>
                             <input value={password} onChange={(e) => setPassword(e.target.value)} className="sign_in_input" type="password" placeholder="Password" required/>
-                            <IKContext
+                            {/* <IKContext
                                 publicKey="public_5rRmOCN1vK/MI28l98iNzt8jNhQ="
                                 urlEndpoint="https://ik.imagekit.io/ebnirpt9i8agxu"
                                 transformationPosition="path"
@@ -275,7 +275,7 @@ const SignIn = () => {
                                 <span className="text-center">{imageLoading && 'Uploading image'}</span>
                                 <label className="sign_in_input up_profile_sign" htmlFor="user_profile">{imageUploadTitle ? `${imageUploadTitle}` : 'Select Profile Image'}</label>
                                 <IKUpload id="user_profile" className="sign_in_input d-none" onChange={(e) => imageUpload(e)} onError={onError} onSuccess={onSuccess} fileName="user-register" />
-                            </IKContext>
+                            </IKContext> */}
                             <span className="text-center text-danger image_error">{imageSelect}</span>
                             {
                                 registerClicked ? <button className="sign_in_page_btn register_spin"><div className="spinner-border text-light" role="status">
@@ -292,7 +292,7 @@ const SignIn = () => {
                                 <FontAwesomeIcon onClick={handleGoogleSignIn} icon={faGoogle} />
                             </div>
                             <span className="sign_in_span">or use your account</span>
-                            <input value={email} onChange={(e) => setEmail(e.target.value)} className="sign_in_input" type="email" placeholder="Email" required/>
+                            <input value={email} onChange={(e) => setEmail(e.target.value)} className="sign_in_input" type="email" placeholder="Email or Phone Number" required/>
                             <input value={password} onChange={(e) => setPassword(e.target.value)} className="sign_in_input" type="password" placeholder="Password" required/>
                             <span className="text-center text-danger image_error">{loginValid}</span>
                             <a className="forgot_password" href="#">Forgot your password?</a>
@@ -332,9 +332,9 @@ const SignIn = () => {
                     </div>
                     <span className="m_sign_span">or use your account</span>
                     {signInUp === 'signUp' && <input value={fullName} onChange={(e) => setFullName(e.target.value)} className="sign_in_input" type="text" placeholder="Name" required/>}
-                    <input value={email} onChange={(e) => setEmail(e.target.value)} className="sign_in_input" type="email" placeholder="Email" required/>
+                    <input value={email} onChange={(e) => setEmail(e.target.value)} className="sign_in_input" type="email" placeholder="Email or Phone Number" required/>
                     <input value={password} onChange={(e) => setPassword(e.target.value)} className="sign_in_input" type="password" placeholder="Password" required/>
-                    {
+                    {/* {
                         signInUp === 'signUp' && <IKContext
                         publicKey="public_5rRmOCN1vK/MI28l98iNzt8jNhQ="
                         urlEndpoint="https://ik.imagekit.io/ebnirpt9i8agxu"
@@ -345,7 +345,7 @@ const SignIn = () => {
                         <label className="sign_in_input up_profile_sign" htmlFor="user_profile">{imageUploadTitle ? `${imageUploadTitle}` : 'Select Profile Image'}</label>
                         <IKUpload id="user_profile" className="sign_in_input d-none" onChange={(e) => imageUpload(e)} onError={onError} onSuccess={onSuccess} fileName="user-register" />
                     </IKContext>
-                    }
+                    } */}
                     <span className="text-center text-danger image_error">{imageSelect}</span>
                     {/* {
                         registerClicked ? <button className="sign_in_page_btn register_spin"><div className="spinner-border text-light" role="status">

@@ -33,10 +33,12 @@
     align-items: center;
 }
 
-.CP_detail_head img {
+.CP_head_tutorial {
     width: 40%;
     margin-right: 3%;
     border-radius: 7px;
+    height: 325px;
+    border: 1px solid #e0e0e0;
 }
 
 .CP_detail_head_details h4 {
@@ -152,9 +154,9 @@
     margin: 8px 0;
 }
 
-#CP_sub_address {
+/* #CP_sub_address {
     margin-top: 5px;
-}
+} */
 
 .CP_shipment_product {
     display: flex;
@@ -186,7 +188,7 @@
     text-align: right;
 }
 
-.CP_payment_btn button {
+.CP_payment_btn_button {
     background-image: linear-gradient(45deg, #FF4B2B, #FF416C);
     color: white;
     font-size: 14px;
@@ -195,7 +197,8 @@
     width: 100%;
     text-align: center;
     border-radius: 3px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
+    cursor: pointer;
 }
 
 .CP_close_modal {

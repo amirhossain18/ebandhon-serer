@@ -21,20 +21,22 @@
 .cat_brands_list,
 .cat_products_list {
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-evenly;
     flex-wrap: wrap;
     padding-top: 20px;
-    align-items: center;
+    /* align-items: center; */
+    margin: 0 !important;
 }
 
 .cat_single_brand,
 .cat_single_product {
     /* border: 1px solid black; */
-    width: 15%;
-    margin: .83%;
+    width: 18.5%;
+    margin: 0;
     cursor: pointer;
     transition: .3s;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .cat_single_brand:hover,
@@ -53,7 +55,7 @@
 
 .cat_single_product {
     background: white;
-    padding: 15px;
+    padding: 10px;
     border-radius: 5px;
     text-decoration: none;
 }

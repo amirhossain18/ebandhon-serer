@@ -1,0 +1,16 @@
+.product_dis_home {
+    position: absolute;
+    top: 15px;
+    left: 5px;
+    color: white !important;
+    background-color: #ff3838;
+    width: 55px;
+    height: 29px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    box-shadow: 0 0 5px #80808091;
+    margin: 0;
+    padding: 0;
+}

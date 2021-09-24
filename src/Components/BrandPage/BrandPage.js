@@ -26,23 +26,28 @@ const Brandproduct = () => {
          <Header></Header>
          {
             categories === null ? <img className="loader" src={loader} alt="" /> : <div className="container brand_page">
-            <div className="bp_brand_image">
-               <img src={selectedBrand.brandImage} alt="" />
-            </div>
-            <div className="brand_page_all_products cat_all_products">
-               <h2>All Products</h2>
-               <div className="bp_products_list cat_products_list">
-                  {
-                     selectedBrandProduct ? selectedBrandProduct.map(product => <Link key={product.id} className="bp_single_product cat_single_product" to={`/product/${product.productCategory}/${product.id}`}>
-                     <div>
-                        <img src={product.productImage} alt="" />
-                        <p>{product.productName}</p>
-                        <span>৳ {product.productPrice} (-{product.productDiscount}%)</span>
-                     </div></Link>) : <h1>No products found</h1>
-                  }
+               <div className="bp_brand_image">
+                  <img src={selectedBrand.brandImage} alt="" />
+               </div>
+               <div className="brand_page_all_products cat_all_products">
+                  <h2>All Products</h2>
+                  <div className="bp_products_list cat_products_list">
+                     {
+                        selectedBrandProduct ? selectedBrandProduct.map(product => <Link key={product.id} className="bp_single_product cat_single_product" to={`/product/${product.productCategory}/${product.id}`}>
+                        <div>
+                           <p className="product_dis_home">-{product.productDiscount}%</p>
+                           <img src={product.productImage} alt="" />
+                           <p>{product.productName}</p>
+                           {/* <span>৳ {product.productPrice} (-{product.productDiscount}%)</span> */}
+                           <div className="drag_scroll_product drag_scroll_product_price">
+                              <span title={product.productPrice}>৳ <del>{product.productPrice}</del> (-{product.productDiscount}%)</span>
+                              <span>৳ {Math.round(product.productPrice - ((product.productPrice * product.productDiscount) / 100))}</span>
+                           </div>
+                        </div></Link>) : <h1>No products found</h1>
+                     }
+                  </div>
                </div>
             </div>
-         </div>
          }
          <Footer></Footer>
       </>

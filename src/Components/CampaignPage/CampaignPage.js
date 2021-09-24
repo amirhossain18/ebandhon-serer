@@ -16,6 +16,10 @@ import laptop2 from './images/laptop (1).jpg'
 import phone2 from './images/phone.jpg'
 
 const CampaignPage = () => {
+    useEffect(() => {
+        document.title = "Campaign | E-Bandhon"
+      }, [])
+
     const [campaignData, setCampaignData] = useState([])
     useEffect(() => {
         fetch('https://bandhon-ecommerce.herokuapp.com/get-campaign-data')

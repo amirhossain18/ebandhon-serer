@@ -9,6 +9,7 @@ import useLocalStorage from '../../LocalStorage/LocalStorage';
 import defaultImage from '../../../images/Spin-1.6s-200px.gif'
 
 const CartShow = (props) => {
+    // console.log(props)
     const { addToast } = useToasts();
     const [cartInfo, setCartInfo] = useContext(CartProducts)
     const [imageLoad, setImageLoad] = useState(false)
@@ -50,26 +51,50 @@ const CartShow = (props) => {
     return (
         <>
             {
-                selectedCategory && 
-                <div className="cart_show">
-                    <div className="cart_page_2_icon">
-                        <Link to={`/product/${productCategory}/${id}`} className="cart_page_edit"><FontAwesomeIcon className="cart_page_svg" icon={faEdit}/></Link>
-                        {
-                            loading === true ? <FontAwesomeIcon className="cart_page_svg cart_delete_btn" icon={faTrashAlt} /> : <FontAwesomeIcon className="cart_page_svg cart_delete_btn" onClick={deleteCartProductBtn} icon={faTrashAlt} />
-                        }
-                    </div>
-                    <div className="cart_show_info">
-                        <img className="d-none" onLoad={() => setImageLoad(true)}src={cartedProduct.productImage} alt="" />
-                        {
-                            imageLoad === true ? <img src={cartedProduct.productImage} alt="" /> : <img src={defaultImage} alt="" />
-                        }
-                        <div className="cart_show_middle">
-                            <h3>{cartedProduct.productName}</h3>
-                            <span>Quantity: {quantity}</span>
+                props.data.dataCategory === 'Hot_Deal' ? <>
+                    <div className="cart_show">
+                        <div className="cart_page_2_icon">
+                            <Link to={`/hot-deal/product/${props.data._id}`} className="cart_page_edit"><FontAwesomeIcon className="cart_page_svg" icon={faEdit}/></Link>
+                            {
+                                loading === true ? <FontAwesomeIcon className="cart_page_svg cart_delete_btn" icon={faTrashAlt} /> : <FontAwesomeIcon className="cart_page_svg cart_delete_btn" onClick={deleteCartProductBtn} icon={faTrashAlt} />
+                            }
                         </div>
+                        <div className="cart_show_info">
+                            <img className="d-none" onLoad={() => setImageLoad(true)}src={props.data.productImage} alt="" />
+                            {
+                                imageLoad === true ? <img src={props.data.productImage} alt="" /> : <img src={defaultImage} alt="" />
+                            }
+                            <div className="cart_show_middle">
+                                <h3>{props.data.productName}</h3>
+                                <span>Quantity: {props.data.quantity}</span>
+                            </div>
+                        </div>
+                        <p>৳ {Math.round(props.data.mainPrice)}</p>
                     </div>
-                    <p>৳ {discountedPrice}</p>
-                </div>
+                </> : <>
+                        {
+                        selectedCategory && cartedProduct && 
+                        <div className="cart_show">
+                            <div className="cart_page_2_icon">
+                                <Link to={`/product/${productCategory}/${id}`} className="cart_page_edit"><FontAwesomeIcon className="cart_page_svg" icon={faEdit}/></Link>
+                                {
+                                    loading === true ? <FontAwesomeIcon className="cart_page_svg cart_delete_btn" icon={faTrashAlt} /> : <FontAwesomeIcon className="cart_page_svg cart_delete_btn" onClick={deleteCartProductBtn} icon={faTrashAlt} />
+                                }
+                            </div>
+                            <div className="cart_show_info">
+                                <img className="d-none" onLoad={() => setImageLoad(true)}src={cartedProduct.productImage} alt="" />
+                                {
+                                    imageLoad === true ? <img src={cartedProduct.productImage} alt="" /> : <img src={defaultImage} alt="" />
+                                }
+                                <div className="cart_show_middle">
+                                    <h3>{cartedProduct.productName}</h3>
+                                    <span>Quantity: {quantity}</span>
+                                </div>
+                            </div>
+                            <p>৳ {Math.round(discountedPrice)}</p>
+                        </div>
+                    }
+                </>
             }
         </>
     );

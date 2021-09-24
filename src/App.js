@@ -28,6 +28,10 @@ import TermsConditions from './Components/Footer/TermsConditions/TermsConditions
 import CampaignPage from './Components/CampaignPage/CampaignPage';
 import CampaignPageUpload from './Components/CampaignPage/CampaignPageUpload/CampaignPageUpload';
 import ProfilePage from './Components/ProfilePage/ProfilePage';
+import HotDeal from './Components/HotDeal/HotDeal';
+import HotDealAdmin from './Components/HotDealAdmin/HotDealAdmin';
+import HotDealProductShow from './Components/HotDeal/HotDealProductShow/HotDealProductShow';
+import MNav from './Components/MNav/MNav';
 
 export const CategoryData = createContext()
 export const UserData = createContext()
@@ -45,7 +49,7 @@ function App() {
   const [cartFormDetails, setCartFormDetails] = useLocalStorage('cart_form', {})
   const [paymentData, setPaymentData] = useLocalStorage('payment_data', {})
   const [campaignPaymentData, setCampaignPaymentData] = useLocalStorage('campaign_payment_data', {})
-  // console.log(categories)
+  // console.log(cartInfo)
 
   useEffect(() => {
     fetch(`https://bandhon-ecommerce.herokuapp.com/get-categories`)
@@ -139,7 +143,17 @@ function App() {
                     <PrivateRoute path="/profile">
                       <ProfilePage/>
                     </PrivateRoute>
+                    <Route exact path="/hot-deal">
+                      <HotDeal/>
+                    </Route>
+                    <PrivateRoute path="/admin/manage/hot-deal">
+                      <HotDealAdmin/>
+                    </PrivateRoute>
+                    <Route path="/hot-deal/product/:productId">
+                      <HotDealProductShow/>
+                    </Route>
                   </Switch>
+                <MNav/>
                 </Router>
               </ToastProvider>
             </CartSubTotal.Provider>

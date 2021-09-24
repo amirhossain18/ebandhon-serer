@@ -100,14 +100,20 @@
     margin: 0 20px;
 }
 
+.drag_scroll_product {
+    width: 200px;
+    padding: 5px;
+    position: relative;
+}
+
 .drag_scroll_products img {
-    width: 165px;
+    width: 190px;
     height: auto;
     cursor: pointer;
 }
 
 .drag_scroll_products a {
-    margin: 0 20px;
+    margin: 0 15px;
     text-decoration: none;
 }
 
@@ -117,17 +123,23 @@
     color: black;
 }
 
-.drag_scroll_products span {
-    font-size: 14px;
+.drag_scroll_product_price {
+    display: flex;
+    align-items: center;
+}
+
+.drag_scroll_product_price span:first-child {
+    font-size: 12px;
     color: #C53131;
+}
+
+.drag_scroll_product_price span:last-child {
+    font-size: 15px;
+    color: #28a745;
+    margin-left: 10px;
 }
 
 .drag_scroll_brands a {
     display: flex;
     align-items: center;
-}
-
-.drag_scroll_product {
-    width: 175px;
-    padding: 5px;
 }

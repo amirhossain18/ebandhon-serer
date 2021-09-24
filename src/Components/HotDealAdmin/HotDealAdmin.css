@@ -1,0 +1,74 @@
+.upload_manage {
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    border: 1px solid lime;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.upload_manage_span {
+    width: 150px;
+    /* background: lime; */
+    text-align: center;
+    color: rgb(0, 226, 0);
+    padding: 7px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.upload_manage_span:hover {
+    background: rgba(0, 255, 0, 0.59);
+    transition: .3s;
+    color: white;
+}
+
+.up_active {
+    background: lime;
+    color: white;
+}
+
+.middle_dot {
+    background: white;
+    height: auto;
+    width: 1px;
+    z-index: 1;
+}
+
+.hot_deal_manage_upload {
+    background: rgb(230, 230, 230);
+    padding: 15px 25px;
+    width: 400px;
+    margin: auto;
+    border-radius: 15px;
+    margin-top: 50px;
+}
+
+.hot_deal_manage_upload input {
+    outline-color: lightblue;
+    width: 100%;
+    margin: 8px auto;
+    padding: 8px 15px;
+    border-radius: 3px;
+    transition: .3s;
+    font-size: 14px;
+    display: block;
+    border: 1px solid lightgray;
+}
+
+.hot_deal_upload_btn {
+    color: white;
+    background: tomato;
+    width: 100%;
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 3px;
+    border: none;
+    transition: .3s;
+}
+
+.hot_deal_upload_btn:hover {
+    background: rgb(255, 84, 54);
+}

@@ -387,3 +387,13 @@
 .admin_header a:hover {
     text-decoration: underline;
 }
+
+.secret_code_btn {
+    color: white;
+    background-color: tomato;
+    font-size: 14px;
+}
+
+.secret_code_btn:hover {
+    color: white;
+}

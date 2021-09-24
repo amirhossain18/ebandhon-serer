@@ -9,12 +9,16 @@ const HPBottomOneProduct = (props) => {
     return (
         <>
             <Link className="drag_scroll_product" to={`/product/${productCategory}/${id}`}>
+                <p className="product_dis_home">-{productDiscount}%</p>
                 <img className="d-none" onLoad={() => setImageLoad(true)} src={productImage} alt="" />
                 {
                     imageLoad ? <img src={productImage} alt="" /> : <img src={defaultImage} alt="" />
                 }
                 <p>{productName}</p>
-                <span>৳ {productPrice} (-{productDiscount}%)</span>
+                <div className="drag_scroll_product_price">
+                    <span title={productPrice}>৳ <del>{productPrice}</del> (-{productDiscount}%)</span>
+                    <span>৳ {Math.round(productPrice - ((productPrice * productDiscount) / 100))}</span>
+                </div>
             </Link>
         </>
     );

@@ -7,6 +7,7 @@ import logo from '../../images/logo.png'
 import { Link, useLocation } from 'react-router-dom';
 import useLocalStorage from '../LocalStorage/LocalStorage'
 import { CartProducts, CategoryOpen, UserData } from '../../App';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const Header = () => {
     const location = useLocation()
@@ -25,145 +26,159 @@ const Header = () => {
 
     const logOutBtn = (e) => {
         e.preventDefault()
+        setAdminSecret({status: false})
         setLoginData({isSignedIn: false})
         setPaymentData([])
         setCampaignPaymentData([])
         setProfileClick(!profileClick)
         window.location.reload()
     }
+
+    const [adminSecret, setAdminSecret] = useLocalStorage('admin_secret', {})
+    const clearSecretCode = () => {
+        setAdminSecret({status: false})
+    }
     return (
         <div className="header">
             {
                 cartInfo?.admin && cartInfo.admin === true && <div className="admin_header container">
+                    <Link to="/admin/manage/hot-deal">Upload Hot Deal</Link>
                     <Link to="/admin/upload/brand">Upload Brand</Link>
                     <Link to="/admin/upload/product">Upload Product</Link>
                     <Link to="/admin/upload/campaign">Upload Campaign</Link>
+                    {
+                        adminSecret.status && <button onClick={clearSecretCode} className="btn secret_code_btn">CLEAR SECRET CODE</button>
+                    }
                 </div>
             }
-            <div className={`category_left_hidden ${categoryOpen && 'category_open_active'}`}>
-                <div style={{position: 'relative'}}>
-                    <FontAwesomeIcon onClick={() => setCategoryOpen(false)} className="cross_icon" icon={faTimes} />
-                    <h1 className="category_left_h1">CATEGORIES</h1>
-                    <div className="category_left_hidden_in">
-                        <Link onClick={categoryToggler} to="/category/Animal Food" className="categories_single_name_hidden">
-                            <a href="#">Animal Food</a>
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </Link>
-                        <div onClick={() => {
-                            if (openHiddenCategory === 'driving') {
-                                setOpenHiddenCategory('')
-                            }
-                            else{
-                                setOpenHiddenCategory('driving')
-                            }
-                        }} className={`categories_single_name_hidden ${openHiddenCategory === 'driving' && 'categories_single_name_hovered'}`}>
-                            <a href="#">Motor Bike/Car</a>
-                            <FontAwesomeIcon className={`${openHiddenCategory === 'driving' && 'active_sub_category_arrow'}`} icon={faCaretRight} />
-                        </div>
-                        <div className={`hidden_sub_categories ${openHiddenCategory === "driving" && 'active_sub_category'}`}>
-                            <Link onClick={categoryToggler} to="/category/Motor Bike" className="hidden_sub_category">
-                                <a href="#">Motor Bike</a>
+            <OutsideClickHandler onOutsideClick={() => {
+                setCategoryOpen(false)
+            }}>
+                <div className={`category_left_hidden ${categoryOpen && 'category_open_active'}`}>
+                    <div style={{position: 'relative'}}>
+                        <FontAwesomeIcon onClick={() => setCategoryOpen(false)} className="cross_icon" icon={faTimes} />
+                        <h1 className="category_left_h1">CATEGORIES</h1>
+                        <div className="category_left_hidden_in">
+                            <Link onClick={categoryToggler} to="/category/Animal Food" className="categories_single_name_hidden">
+                                <a href="#">Animal Food</a>
                                 <FontAwesomeIcon icon={faAngleRight} />
                             </Link>
-                            <Link onClick={categoryToggler} to="/category/Car" className="hidden_sub_category">
-                                <a href="#">Car</a>
+                            <div onClick={() => {
+                                if (openHiddenCategory === 'driving') {
+                                    setOpenHiddenCategory('')
+                                }
+                                else{
+                                    setOpenHiddenCategory('driving')
+                                }
+                            }} className={`categories_single_name_hidden ${openHiddenCategory === 'driving' && 'categories_single_name_hovered'}`}>
+                                <a href="#">Motor Bike/Car</a>
+                                <FontAwesomeIcon className={`${openHiddenCategory === 'driving' && 'active_sub_category_arrow'}`} icon={faCaretRight} />
+                            </div>
+                            <div className={`hidden_sub_categories ${openHiddenCategory === "driving" && 'active_sub_category'}`}>
+                                <Link onClick={categoryToggler} to="/category/Motor Bike" className="hidden_sub_category">
+                                    <a href="#">Motor Bike</a>
+                                    <FontAwesomeIcon icon={faAngleRight} />
+                                </Link>
+                                <Link onClick={categoryToggler} to="/category/Car" className="hidden_sub_category">
+                                    <a href="#">Car</a>
+                                    <FontAwesomeIcon icon={faAngleRight} />
+                                </Link>
+                            </div>
+                            <div onClick={() => {
+                                if (openHiddenCategory === 'electronics') {
+                                    setOpenHiddenCategory('')
+                                }
+                                else{
+                                    setOpenHiddenCategory('electronics')
+                                }
+                            }} className={`categories_single_name_hidden ${openHiddenCategory === 'electronics' && 'categories_single_name_hovered'}`}>
+                                <a href="#">Electronics</a>
+                                <FontAwesomeIcon className={`${openHiddenCategory === 'electronics' && 'active_sub_category_arrow'}`} icon={faCaretRight} />
+                            </div>
+                            <div className={`hidden_sub_categories ${openHiddenCategory === "electronics" && 'active_sub_category'}`}>
+                                <Link onClick={categoryToggler} to="/category/Refrigerator" className="hidden_sub_category">
+                                    <a href="#">Refrigerator</a>
+                                    <FontAwesomeIcon icon={faAngleRight} />
+                                </Link>
+                                <Link onClick={categoryToggler} to="/category/Air-Conditioner" className="hidden_sub_category">
+                                    <a href="#">Air-Conditioner</a>
+                                    <FontAwesomeIcon icon={faAngleRight} />
+                                </Link>
+                            </div>
+                            <Link onClick={categoryToggler} to="/category/Smart & Android TV" className="categories_single_name_hidden">
+                                <a href="#">Smart & Android TV</a>
+                                <FontAwesomeIcon icon={faAngleRight} />
+                            </Link>
+                            <div onClick={() => {
+                                if (openHiddenCategory === 'computer') {
+                                    setOpenHiddenCategory('')
+                                }
+                                else{
+                                    setOpenHiddenCategory('computer')
+                                }
+                            }} className={`categories_single_name_hidden ${openHiddenCategory === 'computer' && 'categories_single_name_hovered'}`}>
+                                <a href="#">Laptop/Desktop</a>
+                                <FontAwesomeIcon className={`${openHiddenCategory === 'computer' && 'active_sub_category_arrow'}`} icon={faCaretRight} />
+                            </div>
+                            <div className={`hidden_sub_categories ${openHiddenCategory === "computer" && 'active_sub_category'}`}>
+                                <Link onClick={categoryToggler} to="/category/Laptop" className="hidden_sub_category">
+                                    <a href="#">Laptop</a>
+                                    <FontAwesomeIcon icon={faAngleRight} />
+                                </Link>
+                                <Link onClick={categoryToggler} to="/category/Desktop" className="hidden_sub_category">
+                                    <a href="#">Desktop</a>
+                                    <FontAwesomeIcon icon={faAngleRight} />
+                                </Link>
+                            </div>
+                            <Link onClick={categoryToggler} to="/category/Grocery" className="categories_single_name_hidden">
+                                <a href="#">Grocery</a>
+                                <FontAwesomeIcon icon={faAngleRight} />
+                            </Link>
+                            <Link onClick={categoryToggler} to="/category/Smart Phone" className="categories_single_name_hidden">
+                                <a href="#">Smart Phone</a>
+                                <FontAwesomeIcon icon={faAngleRight} />
+                            </Link>
+                            <div onClick={() => {
+                                if (openHiddenCategory === 'fashion') {
+                                    setOpenHiddenCategory('')
+                                }
+                                else{
+                                    setOpenHiddenCategory('fashion')
+                                }
+                            }} className={`categories_single_name_hidden ${openHiddenCategory === 'fashion' && 'categories_single_name_hovered'}`}>
+                                <a href="#">Fashion</a>
+                                <FontAwesomeIcon className={`${openHiddenCategory === 'fashion' && 'active_sub_category_arrow'}`} icon={faCaretRight} />
+                            </div>
+                            <div className={`hidden_sub_categories ${openHiddenCategory === "fashion" && 'active_sub_category'}`}>
+                                <Link onClick={categoryToggler} to="/category/Man" className="hidden_sub_category">
+                                    <a href="#">Man</a>
+                                    <FontAwesomeIcon icon={faAngleRight} />
+                                </Link>
+                                <Link onClick={categoryToggler} to="/category/Woman" className="hidden_sub_category">
+                                    <a href="#">Woman</a>
+                                    <FontAwesomeIcon icon={faAngleRight} />
+                                </Link>
+                            </div>
+                            <Link onClick={categoryToggler} to="/category/Tours & Travel" className="categories_single_name_hidden">
+                                <a href="#">Tours & Travel</a>
+                                <FontAwesomeIcon icon={faAngleRight} />
+                            </Link>
+                            <Link onClick={categoryToggler} to="/category/Bandhon Food" className="categories_single_name_hidden">
+                                <a href="#">Bandhon Food</a>
+                                <FontAwesomeIcon icon={faAngleRight} />
+                            </Link>
+                            <Link onClick={categoryToggler} to="/category/Beauty & Body Care" className="categories_single_name_hidden">
+                                <a href="#">Beauty & Body Care</a>
+                                <FontAwesomeIcon icon={faAngleRight} />
+                            </Link>
+                            <Link onClick={categoryToggler} to="/category/Home Appliance" className="categories_single_name_hidden">
+                                <a href="#">Home Appliance</a>
                                 <FontAwesomeIcon icon={faAngleRight} />
                             </Link>
                         </div>
-                        <div onClick={() => {
-                            if (openHiddenCategory === 'electronics') {
-                                setOpenHiddenCategory('')
-                            }
-                            else{
-                                setOpenHiddenCategory('electronics')
-                            }
-                        }} className={`categories_single_name_hidden ${openHiddenCategory === 'electronics' && 'categories_single_name_hovered'}`}>
-                            <a href="#">Electronics</a>
-                            <FontAwesomeIcon className={`${openHiddenCategory === 'electronics' && 'active_sub_category_arrow'}`} icon={faCaretRight} />
-                        </div>
-                        <div className={`hidden_sub_categories ${openHiddenCategory === "electronics" && 'active_sub_category'}`}>
-                            <Link onClick={categoryToggler} to="/category/Refrigerator" className="hidden_sub_category">
-                                <a href="#">Refrigerator</a>
-                                <FontAwesomeIcon icon={faAngleRight} />
-                            </Link>
-                            <Link onClick={categoryToggler} to="/category/Air-Conditioner" className="hidden_sub_category">
-                                <a href="#">Air-Conditioner</a>
-                                <FontAwesomeIcon icon={faAngleRight} />
-                            </Link>
-                        </div>
-                        <Link onClick={categoryToggler} to="/category/Smart & Android TV" className="categories_single_name_hidden">
-                            <a href="#">Smart & Android TV</a>
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </Link>
-                        <div onClick={() => {
-                            if (openHiddenCategory === 'computer') {
-                                setOpenHiddenCategory('')
-                            }
-                            else{
-                                setOpenHiddenCategory('computer')
-                            }
-                        }} className={`categories_single_name_hidden ${openHiddenCategory === 'computer' && 'categories_single_name_hovered'}`}>
-                            <a href="#">Laptop/Desktop</a>
-                            <FontAwesomeIcon className={`${openHiddenCategory === 'computer' && 'active_sub_category_arrow'}`} icon={faCaretRight} />
-                        </div>
-                        <div className={`hidden_sub_categories ${openHiddenCategory === "computer" && 'active_sub_category'}`}>
-                            <Link onClick={categoryToggler} to="/category/Laptop" className="hidden_sub_category">
-                                <a href="#">Laptop</a>
-                                <FontAwesomeIcon icon={faAngleRight} />
-                            </Link>
-                            <Link onClick={categoryToggler} to="/category/Desktop" className="hidden_sub_category">
-                                <a href="#">Desktop</a>
-                                <FontAwesomeIcon icon={faAngleRight} />
-                            </Link>
-                        </div>
-                        <Link onClick={categoryToggler} to="/category/Grocery" className="categories_single_name_hidden">
-                            <a href="#">Grocery</a>
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </Link>
-                        <Link onClick={categoryToggler} to="/category/Smart Phone" className="categories_single_name_hidden">
-                            <a href="#">Smart Phone</a>
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </Link>
-                        <div onClick={() => {
-                            if (openHiddenCategory === 'fashion') {
-                                setOpenHiddenCategory('')
-                            }
-                            else{
-                                setOpenHiddenCategory('fashion')
-                            }
-                        }} className={`categories_single_name_hidden ${openHiddenCategory === 'fashion' && 'categories_single_name_hovered'}`}>
-                            <a href="#">Fashion</a>
-                            <FontAwesomeIcon className={`${openHiddenCategory === 'fashion' && 'active_sub_category_arrow'}`} icon={faCaretRight} />
-                        </div>
-                        <div className={`hidden_sub_categories ${openHiddenCategory === "fashion" && 'active_sub_category'}`}>
-                            <Link onClick={categoryToggler} to="/category/Man" className="hidden_sub_category">
-                                <a href="#">Man</a>
-                                <FontAwesomeIcon icon={faAngleRight} />
-                            </Link>
-                            <Link onClick={categoryToggler} to="/category/Woman" className="hidden_sub_category">
-                                <a href="#">Woman</a>
-                                <FontAwesomeIcon icon={faAngleRight} />
-                            </Link>
-                        </div>
-                        <Link onClick={categoryToggler} to="/category/Tours & Travel" className="categories_single_name_hidden">
-                            <a href="#">Tours & Travel</a>
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </Link>
-                        <Link onClick={categoryToggler} to="/category/Bandhon Food" className="categories_single_name_hidden">
-                            <a href="#">Bandhon Food</a>
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </Link>
-                        <Link onClick={categoryToggler} to="/category/Beauty & Body Care" className="categories_single_name_hidden">
-                            <a href="#">Beauty & Body Care</a>
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </Link>
-                        <Link onClick={categoryToggler} to="/category/Home Appliance" className="categories_single_name_hidden">
-                            <a href="#">Home Appliance</a>
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </Link>
                     </div>
                 </div>
-            </div>
+            </OutsideClickHandler>
             <div className="header_first">
                 <div className="container">
                     <div className="header_top_dev_details">
@@ -173,7 +188,7 @@ const Header = () => {
                         </div>
                         <div className="header_login_btn">
                             {
-                                signedInUser.isSignedIn === true ? <span>{signedInUser.name}<img className="header_image" src={signedInUser.image} alt=""/></span> : loginData.isSignedIn ? <span>{loginData.name}<img className="header_image" src={loginData.image} alt=""/></span> : <Link to={{ 
+                                signedInUser.isSignedIn === true && signedInUser.image ? <span>{signedInUser.name}<img className="header_image" src={signedInUser.image} alt=""/></span> : loginData.isSignedIn ? <span>{loginData.name}<img className="header_image" src={loginData.image} alt=""/></span> : <Link to={{ 
                                     pathname: `/signIn`,
                                     state: location.pathname
                                   }}><span>Login</span></Link>
@@ -194,13 +209,17 @@ const Header = () => {
                     </div>
                     <Link className="header_cart_icon header_right_svg" to="/page/cart"><Cart /><span className="cart_item_count_show">{cartInfo?.cartProducts ? `${cartInfo?.cartProducts.length}` : '0' }</span></Link>
                     <div className="profile_icon">
+                    <OutsideClickHandler onOutsideClick={() => {
+                        setProfileClick(false)
+                    }}>
                         <Person onClick={() => setProfileClick(!profileClick)} className="header_profile_icon" />
                         <div className={`profile_dropdown ${profileClick === true && 'profile_dropdown_active'}`}>
                             <Link className="profile_drop_single" to="/profile">Profile</Link>
-                            {
-                                loginData.uid ? <span onClick={(e) => logOutBtn(e)} className="profile_drop_single">Log Out</span> : <span className="profile_drop_single"><Link to="/signIn">Login</Link></span>
-                            }
+                                {
+                                    loginData.uid ? <span onClick={(e) => logOutBtn(e)} className="profile_drop_single">Log Out</span> : <span className="profile_drop_single"><Link to="/signIn">Login</Link></span>
+                                }
                         </div>
+                    </OutsideClickHandler>
                     </div>
                 </div>
             </div>
@@ -213,7 +232,7 @@ const Header = () => {
                     </div>
                     <div className="extra_nav">
                         <Link to="/campaign">Campaign</Link>
-                        <a href="#">Announcement</a>
+                        <Link to="/hot-deal">Hot Deal</Link>
                     </div>
                 </div>
             </div>
