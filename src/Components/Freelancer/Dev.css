@@ -1,0 +1,43 @@
+.dev-main{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+   
+    
+}
+img.card-img-top {
+    border-radius: 50%;
+    display: grid;
+    width: 50%;
+    justify-content: space-between;
+    justify-items: center;
+    margin: auto;
+}
+
+.social-icon{
+    display:flex;
+    margin:auto;
+}
+
+.social-icon a {
+    margin-right:10px;
+    background-color: gray;
+    border-radius: 40px;
+    width: 50px;
+    text-align: center
+}
+
+
+@media screen and (max-width: 475px) {
+    .dev-main{
+        display:grid;
+        grid-template-columns: repeat(1, 1fr);
+      margin: auto;
+       
+        
+    }
+    .card{
+        margin: auto;
+        margin-top: 5px; 
+    }
+  }

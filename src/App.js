@@ -32,6 +32,7 @@ import HotDeal from './Components/HotDeal/HotDeal';
 import HotDealAdmin from './Components/HotDealAdmin/HotDealAdmin';
 import HotDealProductShow from './Components/HotDeal/HotDealProductShow/HotDealProductShow';
 import MNav from './Components/MNav/MNav';
+import Freelancer from './Components/Freelancer/Freelancer';
 
 export const CategoryData = createContext()
 export const UserData = createContext()
@@ -52,7 +53,7 @@ function App() {
   // console.log(cartInfo)
 
   useEffect(() => {
-    fetch(`https://bandhon-ecommerce.herokuapp.com/get-categories`)
+    fetch(`https://build-amirhossainbond.vercel.app/get-categories`)
     .then(res => res.json())
     .then(data => {
       setCategories(data)
@@ -60,7 +61,7 @@ function App() {
     )
 
     if(loginData.isSignedIn) {
-      fetch(`https://bandhon-ecommerce.herokuapp.com/get-user-data/id?id=${loginData.uid}`)
+      fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
       .then(response => response.json())
       .then(data => {
         if(loginData.isSignedIn) {
@@ -69,7 +70,7 @@ function App() {
       })
     }
     if(signedInUser.isSignedIn) {
-      fetch(`https://bandhon-ecommerce.herokuapp.com/get-user-data/id?id=${loginData.uid}`)
+      fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
       .then(response => response.json())
       .then(data => {
         if(loginData.isSignedIn) {
@@ -145,6 +146,9 @@ function App() {
                     </PrivateRoute>
                     <Route exact path="/hot-deal">
                       <HotDeal/>
+                    </Route>
+                    <Route exact path="/freelancer">
+                      <Freelancer/>
                     </Route>
                     <PrivateRoute path="/admin/manage/hot-deal">
                       <HotDealAdmin/>

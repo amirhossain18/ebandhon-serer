@@ -22,7 +22,7 @@ const CampaignPage = () => {
 
     const [campaignData, setCampaignData] = useState([])
     useEffect(() => {
-        fetch('https://bandhon-ecommerce.herokuapp.com/get-campaign-data')
+        fetch('https://build-amirhossainbond.vercel.app/get-campaign-data')
         .then(response => response.json())
         .then(data => setCampaignData(data))
     }, [])

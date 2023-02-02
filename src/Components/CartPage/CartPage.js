@@ -29,7 +29,7 @@ const CartPage = () => {
             subTotal = subTotal + realPrice
           }
     }
-
+ 
     // getting address
     const [getDistrict, setGetDistrict] = useState([])
     const [district, setDistrict] = useState('')
@@ -39,7 +39,7 @@ const CartPage = () => {
         setDistrict(data)
     }
     useEffect(() => {
-        fetch(`https://bdapis.herokuapp.com/api/v1.1/districts`)
+        fetch(``)
         .then(res => res.json())
         .then(data => {
             setGetDistrict(data.data)

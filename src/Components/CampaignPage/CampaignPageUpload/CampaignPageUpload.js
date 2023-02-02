@@ -12,7 +12,7 @@ const CampaignPageUpload = () => {
     const [productPrice, setProductPrice] = useState('')
     const [productImage, setProductImage] = useState('')
     useEffect(() => {
-        fetch('https://bandhon-ecommerce.herokuapp.com/get-campaign-data')
+        fetch('https://build-amirhossainbond.vercel.app/get-campaign-data')
         .then(response => response.json())
         .then(data => setCampaignData(data))
     }, [])
@@ -49,7 +49,7 @@ const CampaignPageUpload = () => {
             newData = data
         }
         if(selectedCat.products) {
-            fetch(`https://bandhon-ecommerce.herokuapp.com/add-campaign-product/id?id=${selectedCat._id}`, {
+            fetch(`https://build-amirhossainbond.vercel.app/add-campaign-product/id?id=${selectedCat._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(newData)
@@ -57,7 +57,7 @@ const CampaignPageUpload = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch('https://bandhon-ecommerce.herokuapp.com/get-campaign-data')
+                    fetch('https://build-amirhossainbond.vercel.app/get-campaign-data')
                     .then(response => response.json())
                     .then(data => {
                         setCampaignData(data)
@@ -70,7 +70,7 @@ const CampaignPageUpload = () => {
             })
         }
         else{
-            fetch(`https://bandhon-ecommerce.herokuapp.com/add-campaign-product/id?id=${selectedCat._id}`, {
+            fetch(`https://build-amirhossainbond.vercel.app/add-campaign-product/id?id=${selectedCat._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(productData)
@@ -78,7 +78,7 @@ const CampaignPageUpload = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch('https://bandhon-ecommerce.herokuapp.com/get-campaign-data')
+                    fetch('https://build-amirhossainbond.vercel.app/get-campaign-data')
                     .then(response => response.json())
                     .then(data => {
                         setCampaignData(data)
@@ -133,7 +133,7 @@ const CampaignPageUpload = () => {
                                     publicKey="public_5rRmOCN1vK/MI28l98iNzt8jNhQ="
                                     urlEndpoint="https://ik.imagekit.io/ebnirpt9i8agxu"
                                     transformationPosition="path"
-                                    authenticationEndpoint="https://bandhon-ecommerce.herokuapp.com/auth">
+                                    authenticationEndpoint="https://build-amirhossainbond.vercel.app/auth">
 
                                     <h1>{imageLoading && 'uploading image'}</h1>
                                     {

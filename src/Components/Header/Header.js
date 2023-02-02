@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import './Header.css';
 import { Cart, Person } from 'react-bootstrap-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faBars, faAngleRight, faTimes, faCaretRight, faPhoneAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faBars, faAngleRight, faTimes, faCaretRight, faPhoneAlt, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../images/logo.png'
 import { Link, useLocation } from 'react-router-dom';
 import useLocalStorage from '../LocalStorage/LocalStorage'
@@ -151,28 +151,28 @@ const Header = () => {
                             </div>
                             <div className={`hidden_sub_categories ${openHiddenCategory === "fashion" && 'active_sub_category'}`}>
                                 <Link onClick={categoryToggler} to="/category/Man" className="hidden_sub_category">
-                                    <a href="#">Man</a>
+                                    <a href="#v">Man</a>
                                     <FontAwesomeIcon icon={faAngleRight} />
                                 </Link>
                                 <Link onClick={categoryToggler} to="/category/Woman" className="hidden_sub_category">
-                                    <a href="#">Woman</a>
+                                    <a href="#v">Woman</a>
                                     <FontAwesomeIcon icon={faAngleRight} />
                                 </Link>
                             </div>
                             <Link onClick={categoryToggler} to="/category/Tours & Travel" className="categories_single_name_hidden">
-                                <a href="#">Tours & Travel</a>
+                                <a href="#v">Tours & Travel</a>
                                 <FontAwesomeIcon icon={faAngleRight} />
                             </Link>
                             <Link onClick={categoryToggler} to="/category/Bandhon Food" className="categories_single_name_hidden">
-                                <a href="#">Bandhon Food</a>
+                                <a href="#v">Bandhon Food</a>
                                 <FontAwesomeIcon icon={faAngleRight} />
                             </Link>
                             <Link onClick={categoryToggler} to="/category/Beauty & Body Care" className="categories_single_name_hidden">
-                                <a href="#">Beauty & Body Care</a>
+                                <a href="#v">Beauty & Body Care</a>
                                 <FontAwesomeIcon icon={faAngleRight} />
                             </Link>
                             <Link onClick={categoryToggler} to="/category/Home Appliance" className="categories_single_name_hidden">
-                                <a href="#">Home Appliance</a>
+                                <a href="#v">Home Appliance</a>
                                 <FontAwesomeIcon icon={faAngleRight} />
                             </Link>
                         </div>
@@ -183,8 +183,10 @@ const Header = () => {
                 <div className="container">
                     <div className="header_top_dev_details">
                         <div className="contact_details">
-                            <a href="tel:01709038101"><FontAwesomeIcon className="header_contact_icon" icon={faPhoneAlt}/>01709-038101</a>
-                            <a className="email_ebandhon" href = "mailto:ebandhon@gmail.com"><FontAwesomeIcon className="header_contact_icon" icon={faEnvelope}/>ebandhon@gmail.com</a>
+                            <a href="tel:01709038101"><FontAwesomeIcon className="header_contact_icon" icon={faPhoneAlt}/>+880 1923-510098</a>
+                            <a className="email_ebandhon" href = "mailto:ebandhon@gmail.com"><FontAwesomeIcon className="header_contact_icon" icon={faUser}/>Regards
+Priom Mohanta ||
+M.D: Ebandhon</a>
                         </div>
                         <div className="header_login_btn">
                             {
@@ -231,8 +233,9 @@ const Header = () => {
                         <FontAwesomeIcon icon={faAngleRight} />
                     </div>
                     <div className="extra_nav">
-                        <Link to="/campaign">Campaign</Link>
-                        <Link to="/hot-deal">Hot Deal</Link>
+                    <Link to="/campaign">Reseller</Link>
+                        <Link to="/freelancer">Freelancer</Link>
+                        <Link to="/hot-deal">Wait....</Link>
                     </div>
                 </div>
             </div>

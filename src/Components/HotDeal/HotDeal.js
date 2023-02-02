@@ -37,7 +37,7 @@ const HotDeal = () => {
     const [dataLoading, setDataLoading] = useState(true)
 
     useEffect(() => {
-        fetch('https://bandhon-ecommerce.herokuapp.com/get-all-hot-deal-data')
+        fetch('https://build-amirhossainbond.vercel.app/get-all-hot-deal-data')
         .then(res => res.json())
         .then(result => {
             setHotDealData(result)

@@ -18,11 +18,11 @@ const Footer = () => {
                         <Link to="/career">Career</Link>
                     </div>
                     <div className="footer_contact footer_options">
-                        <h1>CONTACT US</h1>
-                        <p>23/3 NABAB KATARA</p>
-                        <p>BANGSHAL</p>
+                        <h1>Regards</h1>
+                        <p>Priom Mohanta</p>
+                        <p>M.D ebandhon</p>
                         <p>1000 DHAKA,</p>
-                        <a href="tel:01709038101"><FontAwesomeIcon className="footer_contact_icon" icon={faPhoneAlt}/>01709-038101</a>
+                        <a href="tel:01709038101"><FontAwesomeIcon className="footer_contact_icon" icon={faPhoneAlt}/>+880 1923-510098</a>
                         <a href="mailto:ebandhon@gmail.com"><FontAwesomeIcon className="footer_contact_icon" icon={faEnvelope}/>ebandhon@gmail.com</a>
                     </div>
                     <div className="footer_get_in_touch footer_options">

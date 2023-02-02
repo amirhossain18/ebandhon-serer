@@ -87,7 +87,7 @@ const Productview = () => {
         const newCartData = [...cartInfo.cartProducts]
         newCartData[findIndex] = updatedData
 
-        fetch(`https://bandhon-ecommerce.herokuapp.com/add-cart-product/id?id=${cartInfo._id}`, {
+        fetch(`https://build-amirhossainbond.vercel.app/add-cart-product/id?id=${cartInfo._id}`, {
             method:'PATCH',
             headers: { 'content-type':'application/json'},
             body:JSON.stringify(newCartData)
@@ -95,7 +95,7 @@ const Productview = () => {
         .then(res => res.json())
         .then(data => {
             if (data.modifiedCount !== 0) {
-                fetch(`https://bandhon-ecommerce.herokuapp.com/get-user-data/id?id=${loginData.uid}`)
+                fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
                 .then(response => response.json())
                 .then(data => {
                     if(loginData.isSignedIn) {
@@ -117,7 +117,7 @@ const Productview = () => {
         const cartData = [{id:selectedProduct.id, quantity:quantity, productCategory:selectedProduct.productCategory, mainPrice:mainPrice}]
         if (cartInfo?.cartProducts) {
             const userCartData = [...cartInfo.cartProducts, {id:selectedProduct.id, quantity:quantity, productCategory:selectedProduct.productCategory, mainPrice:mainPrice}]
-            fetch(`https://bandhon-ecommerce.herokuapp.com/add-cart-product/id?id=${cartInfo._id}`, {
+            fetch(`https://build-amirhossainbond.vercel.app/add-cart-product/id?id=${cartInfo._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(userCartData)
@@ -125,7 +125,7 @@ const Productview = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch(`https://bandhon-ecommerce.herokuapp.com/get-user-data/id?id=${loginData.uid}`)
+                    fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
                     .then(response => response.json())
                     .then(data => {
                         if(loginData.isSignedIn) {
@@ -139,7 +139,7 @@ const Productview = () => {
         }
         else {
             // console.log(cartInfo)
-            fetch(`https://bandhon-ecommerce.herokuapp.com/add-cart-product/id?id=${cartInfo._id}`, {
+            fetch(`https://build-amirhossainbond.vercel.app/add-cart-product/id?id=${cartInfo._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(cartData)
@@ -147,7 +147,7 @@ const Productview = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch(`https://bandhon-ecommerce.herokuapp.com/get-user-data/id?id=${loginData.uid}`)
+                    fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
                     .then(response => response.json())
                     .then(data => {
                         if(loginData.isSignedIn) {

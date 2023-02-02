@@ -28,7 +28,7 @@ const CartShow = (props) => {
         setLoading(true)
         const newCartProducts = cartInfo.cartProducts.filter(product => product.id !== id)
 
-        fetch(`https://bandhon-ecommerce.herokuapp.com/add-cart-product/id?id=${cartInfo._id}`, {
+        fetch(`https://build-amirhossainbond.vercel.app/add-cart-product/id?id=${cartInfo._id}`, {
             method:'PATCH',
             headers: { 'content-type':'application/json'},
             body:JSON.stringify(newCartProducts)
@@ -36,7 +36,7 @@ const CartShow = (props) => {
         .then(res => res.json())
         .then(data => {
             if (data.modifiedCount !== 0) {
-                fetch(`https://bandhon-ecommerce.herokuapp.com/get-user-data/id?id=${loginData.uid}`)
+                fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
                 .then(response => response.json())
                 .then(data => {
                     if(loginData.isSignedIn) {

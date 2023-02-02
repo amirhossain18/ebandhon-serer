@@ -5,7 +5,7 @@ const LuckyWinnerRegisterData = () => {
     const [registerData, setRegisterData] = useState([])
 
     useEffect(() => {
-        fetch('https://bandhon-ecommerce.herokuapp.com/get-lucky-winner-data')
+        fetch('https://build-amirhossainbond.vercel.app/get-lucky-winner-data')
         .then(res => res.json())
         .then(data => setRegisterData(data))
     }, [])

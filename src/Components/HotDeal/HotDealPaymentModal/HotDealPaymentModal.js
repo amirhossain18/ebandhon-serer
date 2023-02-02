@@ -120,7 +120,7 @@ const HotDealPaymentModal = (props) => {
             newData.COD = true
             newData.userId = cartInfo._id
 
-            fetch('https://bandhon-ecommerce.herokuapp.com/hot-deal-cash-on-delivery', {
+            fetch('https://build-amirhossainbond.vercel.app/hot-deal-cash-on-delivery', {
                 method: 'POST',
                 headers: { 'content-type':'application/json' },
                 body: JSON.stringify(newData)
