@@ -1,5 +1,5 @@
 {
-  "name": "Ebandhan",
+  "name": "e-bandhan",
   "version": "0.1.0",
   "homepage": "https://ebandhon.netlify.app/",
   "private": true,
@@ -37,6 +37,8 @@
     "react-timer-hook": "^3.0.4",
     "react-toast-notifications": "^2.5.1",
     "react-uuid": "^1.0.2",
+    "react-whatsapp": "^0.3.0",
+    "react-whatsapp-widget": "^2.1.0",
     "slick-carousel": "^1.8.1",
     "swiper": "^6.7.1",
     "web-vitals": "^1.1.2"
@@ -64,5 +66,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amirhossain18/e-bandhon-new.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amirhossain18/e-bandhon-new/issues"
   }
 }

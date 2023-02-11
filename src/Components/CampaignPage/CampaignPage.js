@@ -22,7 +22,7 @@ const CampaignPage = () => {
 
     const [campaignData, setCampaignData] = useState([])
     useEffect(() => {
-        fetch('https://build-amirhossainbond.vercel.app/get-campaign-data')
+        fetch('https://ebandhon-server.up.railway.app/get-campaign-data')
         .then(response => response.json())
         .then(data => setCampaignData(data))
     }, [])
@@ -38,7 +38,7 @@ const CampaignPage = () => {
     return (
         <>
             <Header/>
-            <div className="campaign_page container">
+            <div className="animate__animated animate__bounce campaign_page container">
                 <a href="#"><FontAwesomeIcon id="campaign_top" className="campaign_go_top" icon={faArrowAltCircleUp}/></a>
                 <div className="CP_header">
                     <a href="#tour">

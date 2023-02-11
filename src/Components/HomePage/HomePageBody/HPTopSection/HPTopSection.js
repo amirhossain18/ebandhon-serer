@@ -70,7 +70,7 @@ const HPTopSection = () => {
         <div className="home_page_top_section">
             <div className="categories_side">
                 <Link to="/category/Animal Food" className="categories_single_name">
-                    <a href="z#">Animal Food</a>
+                    <a href="z#">Accessories</a>
                     <FontAwesomeIcon icon={faAngleRight} />
                 </Link>
                 <div className="categories_single_name">

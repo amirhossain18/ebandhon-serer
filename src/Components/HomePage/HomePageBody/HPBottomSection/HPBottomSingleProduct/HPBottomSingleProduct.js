@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+
 import './HPBottomSingleProduct.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -19,23 +20,30 @@ const HPBottomSingleProduct = (props) => {
     // console.log(selectedCategoryData)
 
     return (
-        <>
+        <div className='animate__animated animate__bounce animate__repeat-2'>
             {
                 selectedCategoryData && <div className="home_single_category_products">
                     <div className="home_products_heading">
                         <Link className="home_category_show_all" to={`/category/${selectedCategoryData.name}`}>{selectedCategoryData.name}</Link>
                         <div className="brands_products">
-                            <p className={`${selection === 'brands' && 'brands_product_active'}`} onClick={() => setSelection('brands')}>Brands</p>
-                            <p className={`${selection === 'products' && 'brands_product_active'}`} onClick={() => setSelection('products')}>All Product</p>
+                            {/* <p className={`${selection === 'brands' && 'brands_product_active'}`} onClick={() => setSelection('brands')}>Brands</p> */}
+                            <p >Product</p>
                         </div>
-                        <div className="products_category_search">
-                            <input id={'search' + props.id} type="text" placeholder="Search product..."/>
-                            <label htmlFor={'search' + props.id}><FontAwesomeIcon icon={faSearch} /></label>
+                        <div >
+                        <Link className="home_category_show_all" to={`/category/${selectedCategoryData.name}`}>All Product</Link>
                         </div>
                     </div>
                     <div className="home_products_show">
                         {
-                            selection === 'brands' ? <div className="HP_show_brands">
+                            selection === 'brands' ? <div className="HP_show_products">
+                            <ScrollContainer className="scroll-container">
+                                <div className="drag_scroll_products">
+                                    {
+                                        selectedCategoryData ? selectedCategoryData.products?.map((data, index) => <HPBottomOneProduct data={data} key={index}/>) : <h1>loading data</h1>
+                                    }
+                                </div>
+                            </ScrollContainer>  
+                        </div>:<div className="HP_show_brands">
                                 <ScrollContainer className="scroll-container">
                                     <div className="drag_scroll_brands">
                                         {
@@ -43,20 +51,12 @@ const HPBottomSingleProduct = (props) => {
                                         }
                                     </div>
                                 </ScrollContainer>
-                            </div> : <div className="HP_show_products">
-                                <ScrollContainer className="scroll-container">
-                                    <div className="drag_scroll_products">
-                                        {
-                                            selectedCategoryData ? selectedCategoryData.products?.map((data, index) => <HPBottomOneProduct data={data} key={index}/>) : <h1>loading data</h1>
-                                        }
-                                    </div>
-                                </ScrollContainer>  
-                            </div>
+                            </div> 
                         }
                     </div>
                 </div>
             }
-        </>
+        </div>
     );
 };
 

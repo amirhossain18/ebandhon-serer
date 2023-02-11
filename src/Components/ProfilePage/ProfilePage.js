@@ -17,7 +17,7 @@ const ProfilePage = () => {
     // getting cart info
     useEffect(() => {
         if(loginData.isSignedIn) {
-            fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
+            fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
             .then(response => response.json())
             .then(data => {
               if(loginData.isSignedIn) {
@@ -26,7 +26,7 @@ const ProfilePage = () => {
             })
           }
           if(signedInUser.isSignedIn) {
-            fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
+            fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
             .then(response => response.json())
             .then(data => {
               if(loginData.isSignedIn) {

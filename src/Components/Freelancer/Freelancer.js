@@ -1,17 +1,19 @@
 import React from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import Header from '../Header/Header';
 import Desiner from './Desiner';
 import Dev from './Dev';
 import './Freelancer.css'
 
 const Freelancer = () => {
     return (
-        <div className='container'>
-        <Tabs
+        <div >
+          <Header></Header>
+        <Tabs 
  defaultActiveKey="profile"
  id="fill-tab-example"
- className="mb-3"
+ className=" container mb-3"
  fill
 >
  <Tab  eventKey="home"  title="Desiner">

@@ -58,6 +58,8 @@ const CartPage = () => {
     }, [district])
     let total = subTotal + shipmentCost
 
+    
+
     // get current date
     const monthNameData = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
     let newDate = new Date()

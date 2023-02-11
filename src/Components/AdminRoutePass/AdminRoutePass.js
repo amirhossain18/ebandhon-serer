@@ -6,7 +6,7 @@ const AdminRoutePass = (data) => {
     const [error, setError] = useState('')
 
     const submitBtn = () => {
-        if(inputValue === "ebn@admin@789"){
+        if(inputValue === "prion1122"){
             setError('')
             data.data({status: "success"})
         }

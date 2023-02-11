@@ -11,9 +11,17 @@ import ReactImageMagnify from 'react-image-magnify';
 import useLocalStorage from '../LocalStorage/LocalStorage';
 import { ToastProvider, useToasts } from 'react-toast-notifications';
 import loader from '../../images/GIF/Funnel.gif'
+import CartShow from '../CartPage/CartShow/CartShow';
 
+
+import { WhatsAppWidget } from 'react-whatsapp-widget';
+import 'react-whatsapp-widget/dist/index.css';
+import ReactWhatsapp from 'react-whatsapp';
 
 const Productview = () => {
+
+
+  
     useEffect(() => {
         document.title = "Product Details | E-Bandhon"
       }, [])
@@ -45,6 +53,7 @@ const Productview = () => {
         )
     }, [cartInfo])
     
+    
     useEffect(() => {
         window.scrollTo(0, 0)
       }, [])
@@ -60,7 +69,13 @@ const Productview = () => {
             setQuantity(quantity - 1)
         }
     }
-
+    let subTotal = 0
+    if(cartInfo?.cartProducts) {
+        for (let i = 0; i < cartInfo.cartProducts.length; i++) {
+            const realPrice = Math.round(cartInfo.cartProducts[i].mainPrice) * cartInfo.cartProducts[i].quantity
+            subTotal = subTotal + realPrice
+          }
+    }
     const plusBtn = () => {
         if (quantity >= selectedProduct.productQuantity) {
 
@@ -87,7 +102,7 @@ const Productview = () => {
         const newCartData = [...cartInfo.cartProducts]
         newCartData[findIndex] = updatedData
 
-        fetch(`https://build-amirhossainbond.vercel.app/add-cart-product/id?id=${cartInfo._id}`, {
+        fetch(`https://ebandhon-server.up.railway.app/add-cart-product/id?id=${cartInfo._id}`, {
             method:'PATCH',
             headers: { 'content-type':'application/json'},
             body:JSON.stringify(newCartData)
@@ -95,7 +110,7 @@ const Productview = () => {
         .then(res => res.json())
         .then(data => {
             if (data.modifiedCount !== 0) {
-                fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
+                fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
                 .then(response => response.json())
                 .then(data => {
                     if(loginData.isSignedIn) {
@@ -108,7 +123,7 @@ const Productview = () => {
         })
         // console.log(newCartData)
     }
-
+   
     const addCartBtn = (e) => {
         e.preventDefault()
         setLoading(true)
@@ -117,7 +132,7 @@ const Productview = () => {
         const cartData = [{id:selectedProduct.id, quantity:quantity, productCategory:selectedProduct.productCategory, mainPrice:mainPrice}]
         if (cartInfo?.cartProducts) {
             const userCartData = [...cartInfo.cartProducts, {id:selectedProduct.id, quantity:quantity, productCategory:selectedProduct.productCategory, mainPrice:mainPrice}]
-            fetch(`https://build-amirhossainbond.vercel.app/add-cart-product/id?id=${cartInfo._id}`, {
+            fetch(`https://ebandhon-server.up.railway.app/add-cart-product/id?id=${cartInfo._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(userCartData)
@@ -125,7 +140,7 @@ const Productview = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
+                    fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
                     .then(response => response.json())
                     .then(data => {
                         if(loginData.isSignedIn) {
@@ -139,7 +154,7 @@ const Productview = () => {
         }
         else {
             // console.log(cartInfo)
-            fetch(`https://build-amirhossainbond.vercel.app/add-cart-product/id?id=${cartInfo._id}`, {
+            fetch(`https://ebandhon-server.up.railway.app/add-cart-product/id?id=${cartInfo._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(cartData)
@@ -147,7 +162,7 @@ const Productview = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
+                    fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
                     .then(response => response.json())
                     .then(data => {
                         if(loginData.isSignedIn) {
@@ -205,6 +220,33 @@ const Productview = () => {
                                 state: location.pathname
                               }}><button className="add_cart_btn">Add to cart</button></Link>
                         }
+                        <Link><button className="add_cart_btn"><ReactWhatsapp  number="+8801923510098" message= {'I want to know about this product ' + selectedProduct.productName } /> Add to cart</button>on</Link>
+ <Link>Whatsapp</Link>
+                    </div>
+                    <div className="product-page-cart">
+                    <div className="cart_cart-product">
+                    <div className="cart_top_header">
+                        <h2>ORDER</h2>
+                        <h2>{cartInfo?.cartProducts ? cartInfo?.cartProducts.length : '0'} Products</h2>
+                    </div>
+                    <div className="cart_show_list">
+                        {
+                            cartInfo === null ? <div className="spinner-border text-secondary cart_spinner" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div> : <div>
+                                    {
+                                        cartInfo && cartInfo?.cartProducts && cartInfo?.cartProducts.map((product, index) => <CartShow key={index} data={product}/>)
+                                    }
+                                </div>
+                        }
+                    </div>
+                    <div className="cart_bottom_prices">
+                      
+                    </div>
+                    <button className="cart_page_btn">
+                        <Link to="/page/cart"> Proceed to Payment</Link>
+                        </button>
+                </div>
                     </div>
                 </div>
                 <div className="single_product_detail">

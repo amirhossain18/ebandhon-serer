@@ -43,7 +43,7 @@ const HotDealProductShow = () => {
     const { addToast } = useToasts();
 
     useEffect(() => {
-        fetch('https://build-amirhossainbond.vercel.app/get-all-hot-deal-data')
+        fetch('https://ebandhon-server.up.railway.app/get-all-hot-deal-data')
         .then(res => res.json())
         .then(result => {
             setSelectedProduct(result.find(data => data._id === paramId.productId))
@@ -122,7 +122,7 @@ const HotDealProductShow = () => {
             const newCartData = [...cartInfo.cartProducts]
             newCartData[findIndex] = productData
 
-            fetch(`https://build-amirhossainbond.vercel.app/add-cart-product/id?id=${cartInfo._id}`, {
+            fetch(`https://ebandhon-server.up.railway.app/add-cart-product/id?id=${cartInfo._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(newCartData)
@@ -130,7 +130,7 @@ const HotDealProductShow = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
+                    fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
                     .then(response => response.json())
                     .then(data => {
                         if(loginData.isSignedIn) {
@@ -162,7 +162,7 @@ const HotDealProductShow = () => {
         // const cartData = [{id:selectedProduct._id, quantity:quantity, productCategory:selectedProduct.productCategory, mainPrice:mainPrice}]
         if (cartInfo?.cartProducts) {
             const userCartData = [...cartInfo.cartProducts, productData]
-            fetch(`https://build-amirhossainbond.vercel.app/add-cart-product/id?id=${cartInfo._id}`, {
+            fetch(`https://ebandhon-server.up.railway.app/add-cart-product/id?id=${cartInfo._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(userCartData)
@@ -170,7 +170,7 @@ const HotDealProductShow = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
+                    fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
                     .then(response => response.json())
                     .then(data => {
                         if(loginData.isSignedIn) {
@@ -184,7 +184,7 @@ const HotDealProductShow = () => {
         }
         else {
             // console.log(cartInfo)
-            fetch(`https://build-amirhossainbond.vercel.app/add-cart-product/id?id=${cartInfo._id}`, {
+            fetch(`https://ebandhon-server.up.railway.app/add-cart-product/id?id=${cartInfo._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify([productData])
@@ -192,7 +192,7 @@ const HotDealProductShow = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
+                    fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
                     .then(response => response.json())
                     .then(data => {
                         if(loginData.isSignedIn) {

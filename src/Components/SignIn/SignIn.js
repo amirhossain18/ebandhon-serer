@@ -37,7 +37,7 @@ const SignIn = () => {
     const handleGoogleSignIn = () => {
         googleSignIn()
         .then(gotLoginData => {
-            fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${gotLoginData.uid}`)
+            fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${gotLoginData.uid}`)
             .then(response => response.json())
             .then(data => {
                 if (data.uid) {
@@ -54,7 +54,7 @@ const SignIn = () => {
                 else {
                     const add_user_data = {name:gotLoginData.name, email:gotLoginData.email, image:gotLoginData.image, uid:gotLoginData.uid}
     
-                    fetch('https://build-amirhossainbond.vercel.app/add-user-data', {
+                    fetch('https://ebandhon-server.up.railway.app/add-user-data', {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify(add_user_data)
@@ -83,7 +83,7 @@ const SignIn = () => {
     const handleFacebookSignIn = () => {
         facebookSignIn()
         .then(gotLoginData => {
-            fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${gotLoginData.uid}`)
+            fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${gotLoginData.uid}`)
             .then(response => response.json())
             .then(data => {
                 if (data.uid) {
@@ -100,7 +100,7 @@ const SignIn = () => {
                 else {
                     const add_user_data = {name:gotLoginData.name, email:gotLoginData.email, image:gotLoginData.image, uid:gotLoginData.uid}
     
-                    fetch('https://build-amirhossainbond.vercel.app/add-user-data', {
+                    fetch('https://ebandhon-server.up.railway.app/add-user-data', {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify(add_user_data)
@@ -162,7 +162,7 @@ const SignIn = () => {
                         setImageSelect('')
                         const uid = uuid().replaceAll('-', '@')
                         const data = {name:fullName, email, password, uid, image:imageLink, imageProfile:imageLink}
-                        fetch('https://build-amirhossainbond.vercel.app/register-new-user', {
+                        fetch('https://ebandhon-server.up.railway.app/register-new-user', {
                             method: 'POST',
                             headers: {'Content-Type': 'application/json'},
                             body: JSON.stringify(data)
@@ -217,7 +217,7 @@ const SignIn = () => {
                 setLoginValid('')
                 setLoginClicked(true)
                 const data = {email, password}
-                fetch('https://build-amirhossainbond.vercel.app/email-pass-login', {
+                fetch('https://ebandhon-server.up.railway.app/email-pass-login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json'},
                     body: JSON.stringify(data)
@@ -270,7 +270,7 @@ const SignIn = () => {
                                 publicKey="public_5rRmOCN1vK/MI28l98iNzt8jNhQ="
                                 urlEndpoint="https://ik.imagekit.io/ebnirpt9i8agxu"
                                 transformationPosition="path"
-                                authenticationEndpoint="https://build-amirhossainbond.vercel.app/auth">
+                                authenticationEndpoint="https://ebandhon-server.up.railway.app/auth">
 
                                 <span className="text-center">{imageLoading && 'Uploading image'}</span>
                                 <label className="sign_in_input up_profile_sign" htmlFor="user_profile">{imageUploadTitle ? `${imageUploadTitle}` : 'Select Profile Image'}</label>
@@ -339,7 +339,7 @@ const SignIn = () => {
                         publicKey="public_5rRmOCN1vK/MI28l98iNzt8jNhQ="
                         urlEndpoint="https://ik.imagekit.io/ebnirpt9i8agxu"
                         transformationPosition="path"
-                        authenticationEndpoint="https://build-amirhossainbond.vercel.app/auth">
+                        authenticationEndpoint="https://ebandhon-server.up.railway.app/auth">
 
                         <span className="text-center">{imageLoading && 'Uploading image'}</span>
                         <label className="sign_in_input up_profile_sign" htmlFor="user_profile">{imageUploadTitle ? `${imageUploadTitle}` : 'Select Profile Image'}</label>

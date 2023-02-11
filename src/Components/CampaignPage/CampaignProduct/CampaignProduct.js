@@ -52,7 +52,7 @@ const CampaignProduct = (props) => {
         setDivision(e.target.value)
     }
     useEffect(() => {
-        fetch(`https://bdapis.herokuapp.com/api/v1.1/divisions`)
+        fetch(``)
         .then(response => response.json())
         .then(data => {
             setGetDivision(data)

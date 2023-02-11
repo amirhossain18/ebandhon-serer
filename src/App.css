@@ -21,3 +21,16 @@ a {
 img {
   pointer-events: none;
 }
+
+a.drag_scroll_product {
+  border: 2px solid red;
+  border-radius: 0 15px;
+}
+
+.drag_scroll_brands a {
+  display: flex;
+  border: 2px solid red;
+  align-items: center;
+  border-radius: 0 15px;
+}
+

@@ -70,7 +70,7 @@ const UploadPage  = () => {
       else {
           catData.products =  [products]
       }
-      fetch(`https://build-amirhossainbond.vercel.app/add-product/id?id=${category._id}`, {
+      fetch(`https://ebandhon-server.up.railway.app/add-product/id?id=${category._id}`, {
           method:'PATCH',
           headers: { 'content-type':'application/json'},
           body:JSON.stringify(catData)
@@ -78,7 +78,7 @@ const UploadPage  = () => {
       .then(response => response.json())
       .then(data => {
           alert('New product successfully added.')
-          fetch(`https://build-amirhossainbond.vercel.app/get-categories`)
+          fetch(`https://ebandhon-server.up.railway.app/get-categories`)
           .then(res => res.json())
           .then(data => {
               setCategories(data)
@@ -138,7 +138,7 @@ const UploadPage  = () => {
                 publicKey="public_5rRmOCN1vK/MI28l98iNzt8jNhQ="
                 urlEndpoint="https://ik.imagekit.io/ebnirpt9i8agxu"
                 transformationPosition="path"
-                authenticationEndpoint="https://build-amirhossainbond.vercel.app/auth">
+                authenticationEndpoint="https://ebandhon-server.up.railway.app/auth">
 
                 <h1>{imageLoading && 'uploading image'}</h1>
                 {

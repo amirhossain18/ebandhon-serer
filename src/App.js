@@ -53,7 +53,7 @@ function App() {
   // console.log(cartInfo)
 
   useEffect(() => {
-    fetch(`https://build-amirhossainbond.vercel.app/get-categories`)
+    fetch(`https://ebandhon-server.up.railway.app/get-categories`)
     .then(res => res.json())
     .then(data => {
       setCategories(data)
@@ -61,7 +61,7 @@ function App() {
     )
 
     if(loginData.isSignedIn) {
-      fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
+      fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
       .then(response => response.json())
       .then(data => {
         if(loginData.isSignedIn) {
@@ -70,7 +70,7 @@ function App() {
       })
     }
     if(signedInUser.isSignedIn) {
-      fetch(`https://build-amirhossainbond.vercel.app/get-user-data/id?id=${loginData.uid}`)
+      fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
       .then(response => response.json())
       .then(data => {
         if(loginData.isSignedIn) {
