@@ -7,16 +7,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
 import { CartProducts, CategoryData } from '../../App';
-import ReactImageMagnify from 'react-image-magnify';
+// import ReactImageMagnify from 'react-image-magnify';
 import useLocalStorage from '../LocalStorage/LocalStorage';
 import { ToastProvider, useToasts } from 'react-toast-notifications';
 import loader from '../../images/GIF/Funnel.gif'
 import CartShow from '../CartPage/CartShow/CartShow';
 
 
-import { WhatsAppWidget } from 'react-whatsapp-widget';
-import 'react-whatsapp-widget/dist/index.css';
-import ReactWhatsapp from 'react-whatsapp';
+// import { WhatsAppWidget } from 'react-whatsapp-widget';
+// import 'react-whatsapp-widget/dist/index.css';
+// import ReactWhatsapp from 'react-whatsapp';
 
 const Productview = () => {
 
@@ -102,7 +102,7 @@ const Productview = () => {
         const newCartData = [...cartInfo.cartProducts]
         newCartData[findIndex] = updatedData
 
-        fetch(`https://ebandhon-server.up.railway.app/add-cart-product/id?id=${cartInfo._id}`, {
+        fetch(`http://localhost:5000/add-cart-product/id?id=${cartInfo._id}`, {
             method:'PATCH',
             headers: { 'content-type':'application/json'},
             body:JSON.stringify(newCartData)
@@ -110,7 +110,7 @@ const Productview = () => {
         .then(res => res.json())
         .then(data => {
             if (data.modifiedCount !== 0) {
-                fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
+                fetch(`http://localhost:5000/get-user-data/id?id=${loginData.uid}`)
                 .then(response => response.json())
                 .then(data => {
                     if(loginData.isSignedIn) {
@@ -132,7 +132,7 @@ const Productview = () => {
         const cartData = [{id:selectedProduct.id, quantity:quantity, productCategory:selectedProduct.productCategory, mainPrice:mainPrice}]
         if (cartInfo?.cartProducts) {
             const userCartData = [...cartInfo.cartProducts, {id:selectedProduct.id, quantity:quantity, productCategory:selectedProduct.productCategory, mainPrice:mainPrice}]
-            fetch(`https://ebandhon-server.up.railway.app/add-cart-product/id?id=${cartInfo._id}`, {
+            fetch(`http://localhost:5000/add-cart-product/id?id=${cartInfo._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(userCartData)
@@ -140,7 +140,7 @@ const Productview = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
+                    fetch(`http://localhost:5000/get-user-data/id?id=${loginData.uid}`)
                     .then(response => response.json())
                     .then(data => {
                         if(loginData.isSignedIn) {
@@ -154,7 +154,7 @@ const Productview = () => {
         }
         else {
             // console.log(cartInfo)
-            fetch(`https://ebandhon-server.up.railway.app/add-cart-product/id?id=${cartInfo._id}`, {
+            fetch(`http://localhost:5000/add-cart-product/id?id=${cartInfo._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(cartData)
@@ -162,7 +162,7 @@ const Productview = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
+                    fetch(`http://localhost:5000/get-user-data/id?id=${loginData.uid}`)
                     .then(response => response.json())
                     .then(data => {
                         if(loginData.isSignedIn) {
@@ -175,7 +175,7 @@ const Productview = () => {
             })
         }
     }
-    
+    console.log(selectedProduct)
     return (
         <>
             <Header></Header>
@@ -184,7 +184,7 @@ const Productview = () => {
                     categories === null ? <img className="loader" src={loader} alt="" /> : <div><div className="product_page_top">
                         
                     <div className="product_page_img">
-                    <ReactImageMagnify {...{
+                    {/* <ReactImageMagnify {...{
                         smallImage: {
                             alt: 'Wristwatch by Ted Baker London',
                             isFluidWidth: true,
@@ -195,8 +195,8 @@ const Productview = () => {
                             width: 1200,
                             height: 1200
                         }
-                    }} />
-                        {/* <img src={selectedProduct.productImage} alt="" /> */}
+                    }} /> */}
+                        <img src={selectedProduct.productImage} alt="" />
                     </div>
                     <div className="product_page_right">
                         <h2>{selectedProduct.productName}</h2>
@@ -220,34 +220,36 @@ const Productview = () => {
                                 state: location.pathname
                               }}><button className="add_cart_btn">Add to cart</button></Link>
                         }
-                        <Link><button className="add_cart_btn"><ReactWhatsapp  number="+8801923510098" message= {'I want to know about this product ' + selectedProduct.productName } /> Add to cart</button>on</Link>
- <Link>Whatsapp</Link>
+                        {/* <Link><button className="add_cart_btn"><ReactWhatsapp  number="+8801923510098" message= {'I want to know about this product ' + selectedProduct.productName } /> Add to cart</button>on</Link>
+ <Link>Whatsapp</Link> */}
                     </div>
-                    <div className="product-page-cart">
-                    <div className="cart_cart-product">
-                    <div className="cart_top_header">
-                        <h2>ORDER</h2>
-                        <h2>{cartInfo?.cartProducts ? cartInfo?.cartProducts.length : '0'} Products</h2>
-                    </div>
-                    <div className="cart_show_list">
-                        {
-                            cartInfo === null ? <div className="spinner-border text-secondary cart_spinner" role="status">
-                                    <span className="sr-only">Loading...</span>
-                                </div> : <div>
-                                    {
-                                        cartInfo && cartInfo?.cartProducts && cartInfo?.cartProducts.map((product, index) => <CartShow key={index} data={product}/>)
-                                    }
+                    {
+                        cartInfo?.cartProducts[0] && <div className="product-page-cart">
+                            <div className="cart_cart-product">
+                                <div className="cart_top_header">
+                                    <h2>ORDER</h2>
+                                    <h2>{cartInfo?.cartProducts ? cartInfo?.cartProducts.length : '0'} Products</h2>
                                 </div>
-                        }
-                    </div>
-                    <div className="cart_bottom_prices">
-                      
-                    </div>
-                    <button className="cart_page_btn">
-                        <Link to="/page/cart"> Proceed to Payment</Link>
-                        </button>
-                </div>
-                    </div>
+                                    <div className="cart_show_list">
+                                        {
+                                            cartInfo === null ? <div className="spinner-border text-secondary cart_spinner" role="status">
+                                                    <span className="sr-only">Loading...</span>
+                                                </div> : <div>
+                                                    {
+                                                        cartInfo && cartInfo?.cartProducts && cartInfo?.cartProducts.map((product, index) => <CartShow key={index} data={product}/>)
+                                                    }
+                                                </div>
+                                        }
+                                    </div>
+                                <div className="cart_bottom_prices">
+                                
+                                </div>
+                                {/* <button className="cart_page_btn"> */}
+                                    <Link to="/page/cart" className='cart_page_btn cart_page_btn_product'> Proceed to Payment</Link>
+                                {/* </button> */}
+                            </div>
+                        </div>
+                    }
                 </div>
                 <div className="single_product_detail">
                     <span>PRODUCT DETAILS</span>

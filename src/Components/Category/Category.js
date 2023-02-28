@@ -29,7 +29,7 @@ const Category = () => {
          <Header></Header>
          {
             categories === null ? <img className="loader" src={loader} alt="" /> : <div className="container category_page">
-               <div className="cat_brand">
+               {/* <div className="cat_brand">
                   <h2>Brands</h2>
                   <div className="cat_brands_list">
                      {
@@ -38,7 +38,7 @@ const Category = () => {
                         </Link>) : <h1>No brands found</h1>
                      }
                   </div>
-               </div>
+               </div> */}
                <div className="cat_all_products">
                   <h2>All Products</h2>
                   <div className="cat_products_list">

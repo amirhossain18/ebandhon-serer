@@ -1,0 +1,37 @@
+.purchased_product_single_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    background: white;
+    margin: 10px 20px;
+    margin-top: 10px;
+    border-radius: 3px;
+    padding: 5px 10px 5px 5px;
+}
+
+.PPSI_image_name_quantity {
+    display: flex;
+    align-items: center;
+}
+
+.purchased_product_single_item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+}
+
+.PPSI_name_quantity h3 {
+    font-size: 18px;
+    margin-bottom: -1px;
+}
+
+.PPSI_name_quantity span {
+    font-size: 15px;
+}
+
+.PPSI_price {
+    margin-bottom: 0;
+    font-size: 20px;
+    color: rgb(185, 22, 1);
+}

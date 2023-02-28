@@ -1,8 +1,8 @@
 .profile_page {
     background: rgb(235, 235, 235);
     margin-bottom: -50px;
-    padding-bottom: 20px;
-    padding-top: 20px;
+    padding-bottom: 30px;
+    padding-top: 30px;
 }
 
 .main_profile {
@@ -12,7 +12,7 @@
 
 .profile_left {
     background: white;
-    height: 550px;
+    height: auto;
     width: 40%;
     box-shadow: 0px 0px 20px #d6d6d6;
     border-radius: 10px;
@@ -20,7 +20,8 @@
 }
 
 .profile_right {
-    height: auto;
+    height: 100%;
+    max-height: 700px;
     width: 55%;
     margin-left: 5%;
     overflow: auto;
@@ -29,11 +30,13 @@
 .profile_page_image {
     position: relative;
     overflow: hidden;
-    height: 250px;
+    height: auto;
 }
 
 .profile_page_profile_photo {
     width: 250px;
+    height: 250px;
+    object-fit: cover;
     border-radius: 5px;
     display: block;
     margin: auto;
@@ -44,7 +47,16 @@
     font-size: 22px;
 }
 
-.profile_page_input {
+.upload_profile_image {
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: rgb(58 233 58 / 68%);
+    border-color: rgb(58 233 58) !important;
+    color: #4d4d4d;
+}
+
+.profile_page_input,
+.upload_profile_image {
     width: 100%;
     border: 1px solid rgb(214, 214, 214);
     border-radius: 3px;
@@ -58,6 +70,10 @@
     height: 45px;
     margin: 15px 0;
     position: relative;
+}
+
+.profile_page_input_div:last-child {
+    margin-bottom: 0;
 }
 
 #profile_page_uid_input {
@@ -83,8 +99,7 @@
 .profile_right_single_section {
     background: white;
     min-height: 200px;
-    max-height: 420px;
-    margin: 40px 25px;
+    margin: 0 25px;
     border-radius: 10px;
     padding: 20px 30px;
     box-shadow: 0px 0px 20px #d6d6d6;
@@ -109,4 +124,9 @@
     height: auto;
     overflow: auto;
     max-height: 344px;
+}
+
+.purchased_items {
+    max-height: calc(700px - 80px);
+    overflow: auto;
 }

@@ -13,7 +13,7 @@ const LuckyWinnerForm = () => {
       }, [])
 
     useEffect(() => {
-        fetch('https://ebandhon-server.up.railway.app/get-lucky-winner-data')
+        fetch('http://localhost:5000/get-lucky-winner-data')
         .then(res => res.json())
         .then(data => setLuckyWinnerData(data))
     }, [])
@@ -23,7 +23,7 @@ const LuckyWinnerForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         setLoading(true)
-        fetch('https://ebandhon-server.up.railway.app/get-lucky-winner-data')
+        fetch('http://localhost:5000/get-lucky-winner-data')
         .then(res => res.json())
         .then(registeredData => {
             setSuccess('')
@@ -41,7 +41,7 @@ const LuckyWinnerForm = () => {
                     setError('')
                     if(alreadySubmittedNumber === undefined) {
                         setError('')
-                        fetch('https://ebandhon-server.up.railway.app/add-lucky-winner-data', {
+                        fetch('http://localhost:5000/add-lucky-winner-data', {
                             method:'POST',
                             headers: {'Content-Type': 'application/json'},
                             body: JSON.stringify(newData)
@@ -49,7 +49,7 @@ const LuckyWinnerForm = () => {
                         .then(res => res.json())
                         .then(data => {
                             if(data.insertedCount === 1) {
-                                fetch('https://ebandhon-server.up.railway.app/get-lucky-winner-data')
+                                fetch('http://localhost:5000/get-lucky-winner-data')
                                 .then(res => res.json())
                                 .then(data => {
                                     setLuckyWinnerData(data)

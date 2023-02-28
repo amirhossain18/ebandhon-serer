@@ -31,32 +31,32 @@ const CartPage = () => {
     }
  
     // getting address
-    const [getDistrict, setGetDistrict] = useState([])
-    const [district, setDistrict] = useState('')
+    // const [getDistrict, setGetDistrict] = useState([])
+    // const [district, setDistrict] = useState('')
 
-    const districtSelect = (e) => {
-        const data = e.target.value
-        setDistrict(data)
-    }
-    useEffect(() => {
-        fetch(``)
-        .then(res => res.json())
-        .then(data => {
-            setGetDistrict(data.data)
-        })
-    }, [])
+    // const districtSelect = (e) => {
+    //     const data = e.target.value
+    //     setDistrict(data)
+    // }
+    // useEffect(() => {
+    //     fetch(``)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         setGetDistrict(data.data)
+    //     })
+    // }, [])
 
     // setting shipment cost
-    const [shipmentCost, setShipmentCost] = useState(120)
-    useEffect(() => {
-        if(district === 'Dhaka'){
-            setShipmentCost(100)
-        }
-        else{
-            setShipmentCost(120)
-        }
-    }, [district])
-    let total = subTotal + shipmentCost
+    // const [shipmentCost, setShipmentCost] = useState(120)
+    // useEffect(() => {
+    //     if(district === 'Dhaka'){
+    //         setShipmentCost(100)
+    //     }
+    //     else{
+    //         setShipmentCost(120)
+    //     }
+    // }, [district])
+    let total = subTotal
 
     
 
@@ -75,10 +75,20 @@ const CartPage = () => {
             setSelectError("You cannot buy products worth more than 500,000 TK")
         }
         else{
-            if(district === '') {
-                setSelectError('Please choose your district*')
-            }
-            else {
+            // if(district === '') {
+            //     setSelectError('Please choose your district*')
+            // }
+            // else {
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = today.getMonth()
+                // var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+                var monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                var month = monthName[mm]
+
+                today = dd + ' ' + month + ' ' + yyyy;
+                
                 
                 if(cartInfo.cartProducts && cartInfo.cartProducts.length !== 0) {
                     setCartFormDetails({fullName:data.fullName, number:data.number, email:data.email, mainAddress: data.mainAddress})
@@ -86,37 +96,56 @@ const CartPage = () => {
                     const newData = {...cartInfo}
                     newData.name = data.fullName
                     newData.email = data.email
+                    newData.phone = data.number
                     newData.mainAddress = data.mainAddress
                     newData.totalAmount = total
+                    newData.status = "pending"
+                    newData.date = today
                     delete newData.admin
                     delete newData.image
                     delete newData._id
                     delete newData.hotDealData
+                    delete newData.password
+                    delete newData.boughtProducts
                     newData.userMDBId = cartInfo._id
-                    newData.district = district
+                    // newData.district = district
                     const transactionId = uuid()
                     newData.transactionId = transactionId
-                    const payment_data = {amount:total, transaction_id:transactionId, success_url:'https://ebandhon.com/payment/success', fail_url:'https://ebandhon.com/payment/fail', customer_name:newData.fullName, customer_mobile:newData.number}
-                    fetch(`https://api.ebandhon.com/call-payment-gateway`, {
-                        method:'POST',
-                        headers: {'content-type':'application/json'},
-                        body:JSON.stringify(payment_data)
+                    
+                    fetch(`http://localhost:5000/buy-products/id?id=${newData.uid}`, {
+                        method:'PATCH',
+                        headers: { 'content-type':'application/json'},
+                        body:JSON.stringify(newData)
                     })
                     .then(res => res.json())
-                    .then(data => {
-                        if(data.error){
-                            console.log(data.error)
-                        }
-                        else {
-                            setPaymentData({...newData, transactionId, date:date+" "+month+" "+year})
-                            window.location.replace(`${data.data.link}`)
+                    .then(result => {
+                        // console.log(result.insertedCount)
+                        if(result.success === true) {
+                            window.location.replace('http://localhost:3000/payment/success')
                         }
                     })
+
+                    // const payment_data = {amount:total, transaction_id:transactionId, success_url:'https://ebandhon.com/payment/success', fail_url:'https://ebandhon.com/payment/fail', customer_name:newData.fullName, customer_mobile:newData.number}
+                    // fetch(`https://api.ebandhon.com/call-payment-gateway`, {
+                    //     method:'POST',
+                    //     headers: {'content-type':'application/json'},
+                    //     body:JSON.stringify(payment_data)
+                    // })
+                    // .then(res => res.json())
+                    // .then(data => {
+                    //     if(data.error){
+                    //         console.log(data.error)
+                    //     }
+                    //     else {
+                    //         setPaymentData({...newData, transactionId, date:date+" "+month+" "+year})
+                    //         window.location.replace(`${data.data.link}`)
+                    //     }
+                    // })
                 }
                 else{
                     setSelectError('Your cart is empty. Buy something to proceed.')
                 }
-            }
+            // }
         }
     };
     return (
@@ -142,7 +171,7 @@ const CartPage = () => {
                             <label htmlFor="mainAddress">Main Address</label>
                             <input defaultValue={cartFormDetails.mainAddress} {...register("mainAddress", { required: true })} id="mainAddress" type="text" placeholder="House/Holding Address"/>
                         </div>
-                        <div className="shipment_field">
+                        {/* <div className="shipment_field">
                             {
                                 selectError !== '' && <p className="select_error">{selectError}</p>
                             }
@@ -157,7 +186,7 @@ const CartPage = () => {
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="cart_cart">
@@ -177,8 +206,8 @@ const CartPage = () => {
                         }
                     </div>
                     <div className="cart_bottom_prices">
-                        <p>Sub Total: <span>৳ {subTotal}</span></p>
-                        <p>Shipment: <span>৳ {shipmentCost}</span></p>
+                        {/* <p>Sub Total: <span>৳ {subTotal}</span></p>
+                        <p>Shipment: <span>৳ {shipmentCost}</span></p> */}
                         <p>Total: <span>৳ {total}</span></p>
                     </div>
                     <button className="cart_page_btn">Proceed to Payment</button>

@@ -5,7 +5,7 @@ const LuckyWinnerRegisterData = () => {
     const [registerData, setRegisterData] = useState([])
 
     useEffect(() => {
-        fetch('https://ebandhon-server.up.railway.app/get-lucky-winner-data')
+        fetch('http://localhost:5000/get-lucky-winner-data')
         .then(res => res.json())
         .then(data => setRegisterData(data))
     }, [])

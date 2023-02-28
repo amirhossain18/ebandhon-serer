@@ -4,7 +4,7 @@ import Footer from '../../Footer/Footer';
 import Header from '../../Header/Header';
 import './HotDealProductShow.css';
 import pageLoading from '../../../images/Pulse-1s-200px.gif'
-import ReactImageMagnify from 'react-image-magnify';
+// import ReactImageMagnify from 'react-image-magnify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import Ripples from 'react-ripples'
@@ -43,7 +43,7 @@ const HotDealProductShow = () => {
     const { addToast } = useToasts();
 
     useEffect(() => {
-        fetch('https://ebandhon-server.up.railway.app/get-all-hot-deal-data')
+        fetch('http://localhost:5000/get-all-hot-deal-data')
         .then(res => res.json())
         .then(result => {
             setSelectedProduct(result.find(data => data._id === paramId.productId))
@@ -122,7 +122,7 @@ const HotDealProductShow = () => {
             const newCartData = [...cartInfo.cartProducts]
             newCartData[findIndex] = productData
 
-            fetch(`https://ebandhon-server.up.railway.app/add-cart-product/id?id=${cartInfo._id}`, {
+            fetch(`http://localhost:5000/add-cart-product/id?id=${cartInfo._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(newCartData)
@@ -130,7 +130,7 @@ const HotDealProductShow = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
+                    fetch(`http://localhost:5000/get-user-data/id?id=${loginData.uid}`)
                     .then(response => response.json())
                     .then(data => {
                         if(loginData.isSignedIn) {
@@ -162,7 +162,7 @@ const HotDealProductShow = () => {
         // const cartData = [{id:selectedProduct._id, quantity:quantity, productCategory:selectedProduct.productCategory, mainPrice:mainPrice}]
         if (cartInfo?.cartProducts) {
             const userCartData = [...cartInfo.cartProducts, productData]
-            fetch(`https://ebandhon-server.up.railway.app/add-cart-product/id?id=${cartInfo._id}`, {
+            fetch(`http://localhost:5000/add-cart-product/id?id=${cartInfo._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(userCartData)
@@ -170,7 +170,7 @@ const HotDealProductShow = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
+                    fetch(`http://localhost:5000/get-user-data/id?id=${loginData.uid}`)
                     .then(response => response.json())
                     .then(data => {
                         if(loginData.isSignedIn) {
@@ -184,7 +184,7 @@ const HotDealProductShow = () => {
         }
         else {
             // console.log(cartInfo)
-            fetch(`https://ebandhon-server.up.railway.app/add-cart-product/id?id=${cartInfo._id}`, {
+            fetch(`http://localhost:5000/add-cart-product/id?id=${cartInfo._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify([productData])
@@ -192,7 +192,7 @@ const HotDealProductShow = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount !== 0) {
-                    fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
+                    fetch(`http://localhost:5000/get-user-data/id?id=${loginData.uid}`)
                     .then(response => response.json())
                     .then(data => {
                         if(loginData.isSignedIn) {
@@ -217,7 +217,7 @@ const HotDealProductShow = () => {
                     <div className="container">
                         <div className="product_page_top">
                             <div className="product_page_img">
-                            <ReactImageMagnify style={{zIndex: '999'}} {...{
+                            {/* <ReactImageMagnify style={{zIndex: '999'}} {...{
                                 smallImage: {
                                     alt: 'Wristwatch by Ted Baker London',
                                     isFluidWidth: true,
@@ -228,8 +228,8 @@ const HotDealProductShow = () => {
                                     width: 1200,
                                     height: 1200
                                 }
-                            }} />
-                                {/* <img src={selectedProduct.productImage} alt="" /> */}
+                            }} /> */}
+                                <img src={selectedProduct.productImage} alt="" />
                             </div>
                             <div className="product_page_right">
                                 <h2>{selectedProduct.productName}</h2>

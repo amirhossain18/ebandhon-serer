@@ -22,7 +22,7 @@ const CampaignPage = () => {
 
     const [campaignData, setCampaignData] = useState([])
     useEffect(() => {
-        fetch('https://ebandhon-server.up.railway.app/get-campaign-data')
+        fetch('http://localhost:5000/get-campaign-data')
         .then(response => response.json())
         .then(data => setCampaignData(data))
     }, [])

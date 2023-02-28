@@ -12,7 +12,7 @@ const CampaignPageUpload = () => {
     const [productPrice, setProductPrice] = useState('')
     const [productImage, setProductImage] = useState('')
     useEffect(() => {
-        fetch('https://ebandhon-server.up.railway.app/get-campaign-data')
+        fetch('http://localhost:5000/get-campaign-data')
         .then(response => response.json())
         .then(data => setCampaignData(data))
     }, [])
@@ -49,7 +49,7 @@ const CampaignPageUpload = () => {
             newData = data
         }
         if(selectedCat.products) {
-            fetch(`https://ebandhon-server.up.railway.app/add-campaign-product/id?id=${selectedCat._id}`, {
+            fetch(`http://localhost:5000/add-campaign-product/id?id=${selectedCat._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(newData)
@@ -70,7 +70,7 @@ const CampaignPageUpload = () => {
             })
         }
         else{
-            fetch(`https://ebandhon-server.up.railway.app/add-campaign-product/id?id=${selectedCat._id}`, {
+            fetch(`http://localhost:5000/add-campaign-product/id?id=${selectedCat._id}`, {
                 method:'PATCH',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(productData)

@@ -76,7 +76,7 @@ const HotDealAdminUpload = () => {
     const onSubmit = data => {
         if(imageLink !== ''){
             const hotDealData = {...data, productImage: imageLink}
-            fetch(`https://ebandhon-server.up.railway.app/add-hot-deal-data`, {
+            fetch(`http://localhost:5000/add-hot-deal-data`, {
                 method: 'POST',
                 headers: { 'content-type':'application/json'},
                 body:JSON.stringify(hotDealData)
@@ -107,7 +107,7 @@ const HotDealAdminUpload = () => {
                 publicKey="public_5rRmOCN1vK/MI28l98iNzt8jNhQ="
                 urlEndpoint="https://ik.imagekit.io/ebnirpt9i8agxu"
                 transformationPosition="path"
-                authenticationEndpoint="https://ebandhon-server.up.railway.app/auth">
+                authenticationEndpoint="http://localhost:5000/auth">
 
                 <h1>{imageLoading && 'uploading image'}</h1>
                 {

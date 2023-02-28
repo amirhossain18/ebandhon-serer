@@ -149,3 +149,20 @@
   
 }
 
+
+
+.cart_cart-product {
+  padding: 10px;
+  width: 400px;
+}
+
+.cart_page_btn_product {
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart_page_btn_product:hover {
+  color: white;
+}

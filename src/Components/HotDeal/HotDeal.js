@@ -37,7 +37,7 @@ const HotDeal = () => {
     const [dataLoading, setDataLoading] = useState(true)
 
     useEffect(() => {
-        fetch('https://ebandhon-server.up.railway.app/get-all-hot-deal-data')
+        fetch('http://localhost:5000/get-all-hot-deal-data')
         .then(res => res.json())
         .then(result => {
             setHotDealData(result)

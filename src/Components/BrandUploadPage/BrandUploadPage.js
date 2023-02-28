@@ -49,7 +49,7 @@ const BrandUploadPage = () => {
                         data.brands =  [brands]
                     }
                     // console.log(data)
-                    fetch(`https://ebandhon-server.up.railway.app/add-brand/id?id=${category._id}`, {
+                    fetch(`http://localhost:5000/add-brand/id?id=${category._id}`, {
                         method:'PATCH',
                         headers: { 'content-type':'application/json'},
                         body:JSON.stringify(data)
@@ -57,7 +57,7 @@ const BrandUploadPage = () => {
                     .then(response => response.json())
                     .then(data => {
                         alert('New brand successfully added.')
-                        fetch(`https://ebandhon-server.up.railway.app/get-categories`)
+                        fetch(`http://localhost:5000/get-categories`)
                         .then(res => res.json())
                         .then(data => {
                             setCategories(data)
@@ -119,7 +119,7 @@ const BrandUploadPage = () => {
                             publicKey="public_5rRmOCN1vK/MI28l98iNzt8jNhQ="
                             urlEndpoint="https://ik.imagekit.io/ebnirpt9i8agxu"
                             transformationPosition="path"
-                            authenticationEndpoint="https://ebandhon-server.up.railway.app/auth">
+                            authenticationEndpoint="http://localhost:5000/auth">
     
                             <h1>{imageLoading && 'uploading image'}</h1>
                             {

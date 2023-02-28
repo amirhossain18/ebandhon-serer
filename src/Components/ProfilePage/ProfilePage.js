@@ -9,15 +9,19 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { CartProducts, UserData } from '../../App';
 import ProfileCampaignProduct from './ProfileCampaignProduct/ProfileCampaignProduct';
 import ProfileHotDealProduct from './ProfileHotDealProduct/ProfileHotDealProduct';
+import UploadProfileImage from './UploadProfileImage/UploadProfileImage';
+import PurchasedProducts from './PurchasedProducts/PurchasedProducts';
 
 const ProfilePage = () => {
     const [loginData, setLoginData] = useLocalStorage('user_data', {})
+    const [purchasedData, setPurchasedData] = useState({})
     const [signedInUser, setSignedInUser] = useContext(UserData)
     const [cartInfo, setCartInfo] = useContext(CartProducts)
+    const [profileImage, setProfileImage] = useState(false)
     // getting cart info
     useEffect(() => {
         if(loginData.isSignedIn) {
-            fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
+            fetch(`http://localhost:5000/get-user-data/id?id=${loginData.uid}`)
             .then(response => response.json())
             .then(data => {
               if(loginData.isSignedIn) {
@@ -26,7 +30,7 @@ const ProfilePage = () => {
             })
           }
           if(signedInUser.isSignedIn) {
-            fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
+            fetch(`http://localhost:5000/get-user-data/id?id=${loginData.uid}`)
             .then(response => response.json())
             .then(data => {
               if(loginData.isSignedIn) {
@@ -34,6 +38,25 @@ const ProfilePage = () => {
               }
             })
           }
+    }, [])
+
+    useEffect(() => {
+        if(loginData.boughtProducts) {
+            setPurchasedData(loginData.boughtProducts.reverse())
+        }
+    }, [loginData])
+
+
+    // getting profile data
+    useEffect(() => {
+        if(loginData.isSignedIn) {
+            fetch(`http://localhost:5000/get-profile-data/id?id=${loginData.uid}`)
+            .then(res => res.json())
+            .then(data => {
+                setLoginData(data)
+            })
+        }
+        
     }, [])
 
     const [showUID, setShowUID] = useState(false)
@@ -47,6 +70,7 @@ const ProfilePage = () => {
     //      .then(res => res.json())
     //      .then(data => console.log(data))
     // }, [])
+
     return (
         <>
             <Header/>
@@ -55,12 +79,15 @@ const ProfilePage = () => {
                     <div className="profile_left">
                         <div className="profile_page_image">
                             {
-                                loginData.imageProfile ? <img className="profile_page_profile_photo" src={loginData.imageProfile} alt="" /> : <img className="profile_page_profile_photo" src={default_photo} alt="" />
+                                loginData.image ? <img className="profile_page_profile_photo" src={loginData.image} alt="" /> : <img className="profile_page_profile_photo" src={default_photo} alt="" />
                             }
                             {/* <img className="profile_page_profile_photo" src={default_photo} alt="" /> */}
-                            <div className="upload_profile_image">
-                                
-                            </div>
+                            <label onClick={e => setProfileImage(true)} className="upload_profile_image">
+                                <span>Upload Profile Picture</span>
+                            </label>
+                            {
+                                profileImage === true && <UploadProfileImage setProfileImage={setProfileImage} profileImage={profileImage} />
+                            }
                         </div>
                         <h4 className="profile_page_my_profile">My Profile</h4>
                         <div className="profile_page_input_div">
@@ -81,11 +108,18 @@ const ProfilePage = () => {
                     <div className="profile_right">
                         <div className="profile_right_cart_section profile_right_single_section">
                             <div className="PPR_header">
-                                <h1>Cart bought Products</h1>
-                                <h5 className="d-flex justify-content-center mt-4 text-center">You did not bought any products!</h5>
+                                <h1>Purchased Items</h1>
+                                <div className='purchased_items'>
+                                    {
+                                        loginData.boughtProducts ? 
+                                            loginData.boughtProducts.map(product => <PurchasedProducts products={product} />)
+                                        : 
+                                        <h5 className="d-flex justify-content-center mt-4 text-center">You did not purchased any items!</h5>
+                                    }
+                                </div>
                             </div>
                         </div>
-                        <div className="profile_right_campaign_section profile_right_single_section">
+                        {/* <div className="profile_right_campaign_section profile_right_single_section">
                             <div className="PPR_header">
                                 <h1>Campaign bought Products</h1>
                                 <div className="PPR_campaign_data">
@@ -106,7 +140,7 @@ const ProfilePage = () => {
                                 </div>
                                 </div>
                             </div>
-                        }
+                        } */}
                     </div>
                 </div>
             </div>

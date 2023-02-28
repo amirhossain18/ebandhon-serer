@@ -497,6 +497,7 @@
     
     .profile_page_profile_photo {
         width: 225px !important;
+        height: 225px !important;
     }
     
     .profile_page_my_profile {
@@ -1529,6 +1530,7 @@
 
     .profile_page_profile_photo {
         width: 200px !important;
+        height: 200px !important;
     }
 
     .profile_page_input,

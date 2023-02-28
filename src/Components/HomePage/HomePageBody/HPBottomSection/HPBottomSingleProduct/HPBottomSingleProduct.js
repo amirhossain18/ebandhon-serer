@@ -24,7 +24,8 @@ const HPBottomSingleProduct = (props) => {
             {
                 selectedCategoryData && <div className="home_single_category_products">
                     <div className="home_products_heading">
-                        <Link className="home_category_show_all" to={`/category/${selectedCategoryData.name}`}>{selectedCategoryData.name}</Link>
+                        {/* <Link className="home_category_show_all" to={`/category/${selectedCategoryData.name}`}>{selectedCategoryData.name}</Link> */}
+                        <span className="home_category_show_all">{selectedCategoryData.name}</span>
                         <div className="brands_products">
                             {/* <p className={`${selection === 'brands' && 'brands_product_active'}`} onClick={() => setSelection('brands')}>Brands</p> */}
                             <p >Product</p>

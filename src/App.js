@@ -53,7 +53,7 @@ function App() {
   // console.log(cartInfo)
 
   useEffect(() => {
-    fetch(`https://ebandhon-server.up.railway.app/get-categories`)
+    fetch(`http://localhost:5000/get-categories`)
     .then(res => res.json())
     .then(data => {
       setCategories(data)
@@ -61,25 +61,35 @@ function App() {
     )
 
     if(loginData.isSignedIn) {
-      fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
+      fetch(`http://localhost:5000/get-user-data/id?id=${loginData.uid}`)
       .then(response => response.json())
       .then(data => {
+        console.log('app', data)
         if(loginData.isSignedIn) {
           setCartInfo(data)
+          const newData = data
+          delete(newData.password)
+          newData.isSignedIn = true
+          setLoginData(newData)
         }
       })
     }
     if(signedInUser.isSignedIn) {
-      fetch(`https://ebandhon-server.up.railway.app/get-user-data/id?id=${loginData.uid}`)
+      fetch(`http://localhost:5000/get-user-data/id?id=${loginData.uid}`)
       .then(response => response.json())
       .then(data => {
+        console.log('app', data)
         if(loginData.isSignedIn) {
           setCartInfo(data)
+          const newData = data
+          delete(newData.password)
+          newData.isSignedIn = true
+          setLoginData(newData)
         }
       })
     }
 
-  }, [loginData, signedInUser])
+  }, [signedInUser])
 
   return (
     <UserData.Provider value={[signedInUser, setSignedInUser]}>
